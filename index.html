@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+
+
+	<script>
+(async () => {
+  try {
+    // Wenn maintenance.on existiert -> Wartungsseite anzeigen
+    const res = await fetch('/maintenance.on', { cache: 'no-store' });
+    if (res.ok) window.location.replace('/maintenance.html');
+  } catch (e) {
+    // wenn fetch nicht klappt: normal laden
+  }
+})();
+</script>
+	
+	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%234F46E5'/><text x='50' y='68' text-anchor='middle' font-size='50' font-family='monospace' fill='white'>&lt;/&gt;</text></svg>">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SasjaDesign | Webdesign für lokale Unternehmen</title>
+    <meta name="description" content="Professionelles Webdesign für lokale Unternehmen. Moderne, schnelle und mobiloptimierte Websites, die echte Kunden bringen.">
+
+    <!-- Dark Mode sofort anwenden -->
+    <script>
+        (function(){
+            var m=document.cookie.match(/(?:^|;\s*)theme=([^;]*)/);
+            var t=m?decodeURIComponent(m[1]):null;
+            if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ==================== PAGE LOADER ==================== -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#hero" class="logo">
+                <span class="logo-icon">&lt;/&gt;</span>
+                <span class="logo-text">SasjaDesign<span class="logo-dot">.</span></span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#hero" class="nav-link active">Start</a>
+                <a href="#services" class="nav-link">Leistungen</a>
+                <a href="#portfolio" class="nav-link">Portfolio</a>
+                <a href="#process" class="nav-link">Ablauf</a>
+                <a href="#pricing" class="nav-link">Preise</a>
+                <a href="#testimonials" class="nav-link">Referenzen</a>
+                <a href="#contact" class="nav-link">Kontakt</a>
+            </div>
+            <div class="nav-actions">
+                <a href="#contact" class="btn btn-primary nav-cta">Kontakt</a>
+                <button class="hamburger" id="navHamburger" aria-label="Menü öffnen">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO ==================== -->
+    <section class="hero" id="hero">
+        <div class="hero-bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+        <div class="container hero-container">
+            <div class="hero-content" data-animate>
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    Verfügbar für neue Projekte
+                </div>
+                <h1 class="hero-title">
+                    Moderne Websites <br>für <span class="text-gradient">lokale Unternehmen</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Ich helfe lokalen Unternehmen, online sichtbar zu werden – mit professionellen,
+                    schnellen und mobiloptimierten Websites, die echte Kunden bringen.
+                </p>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-primary btn-lg">Kostenlose Beratung <i class="fas fa-arrow-right"></i></a>
+                    <a href="#portfolio" class="btn btn-outline btn-lg">Meine Arbeiten</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number" data-count="15">0</span><span class="stat-plus">+</span>
+                        <span class="stat-label">Projekte</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-number" data-count="100">0</span><span class="stat-plus">%</span>
+                        <span class="stat-label">Zufriedenheit</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-number" data-count="5">0</span><span class="stat-plus">★</span>
+                        <span class="stat-label">Bewertung</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual" data-animate="fade-left">
+                <div class="browser-mockup">
+                    <div class="browser-header">
+                        <div class="browser-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <div class="browser-url">
+                            <i class="fas fa-lock"></i>
+                            www.dein-kunde.de
+                        </div>
+                    </div>
+                    <div class="browser-body">
+                        <div class="mock-nav"></div>
+                        <div class="mock-hero-section">
+                            <div class="mock-badge"></div>
+                            <div class="mock-title"></div>
+                            <div class="mock-text"></div>
+                            <div class="mock-text short"></div>
+                            <div class="mock-btn"></div>
+                        </div>
+                        <div class="mock-cards">
+                            <div class="mock-card">
+                                <div class="mock-card-icon"></div>
+                                <div class="mock-card-line"></div>
+                                <div class="mock-card-line short"></div>
+                            </div>
+                            <div class="mock-card">
+                                <div class="mock-card-icon"></div>
+                                <div class="mock-card-line"></div>
+                                <div class="mock-card-line short"></div>
+                            </div>
+                            <div class="mock-card">
+                                <div class="mock-card-icon"></div>
+                                <div class="mock-card-line"></div>
+                                <div class="mock-card-line short"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="floating-card card-speed">
+                    <i class="fas fa-bolt"></i>
+                    <div>
+                        <span class="fc-value">0.8s</span>
+                        <span class="fc-label">Ladezeit</span>
+                    </div>
+                </div>
+                <div class="floating-card card-mobile">
+                    <i class="fas fa-mobile-alt"></i>
+                    <div>
+                        <span class="fc-value">100%</span>
+                        <span class="fc-label">Mobiloptimiert</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SERVICES ==================== -->
+    <section class="services section" id="services">
+        <div class="container">
+            <div class="section-header" data-animate>
+                <span class="section-tag">Leistungen</span>
+                <h2 class="section-title">Alles, was dein Unternehmen <span class="text-gradient">online braucht</span></h2>
+                <p class="section-subtitle">Von der ersten Idee bis zur fertigen Website – ich kümmere mich um alles, damit du dich auf dein Geschäft konzentrieren kannst.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" data-animate data-delay="0">
+                    <div class="service-icon"><i class="fas fa-palette"></i></div>
+                    <h3>Webdesign</h3>
+                    <p>Individuelles, modernes Design, das zu deiner Marke passt und Vertrauen bei deinen Kunden aufbaut.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Individuelles Design</li>
+                        <li><i class="fas fa-check"></i> Responsive Layout</li>
+                        <li><i class="fas fa-check"></i> Benutzerfreundlich</li>
+                    </ul>
+                </div>
+                <div class="service-card" data-animate data-delay="100">
+                    <div class="service-icon"><i class="fas fa-code"></i></div>
+                    <h3>Webentwicklung</h3>
+                    <p>Schnelle, sichere und saubere Programmierung mit den neuesten Technologien für beste Performance.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Schnelle Ladezeiten</li>
+                        <li><i class="fas fa-check"></i> Sauberer Code</li>
+                        <li><i class="fas fa-check"></i> SSL-Verschlüsselung</li>
+                    </ul>
+                </div>
+                <div class="service-card" data-animate data-delay="200">
+                    <div class="service-icon"><i class="fas fa-search"></i></div>
+                    <h3>SEO-Optimierung</h3>
+                    <p>Damit dein Unternehmen bei Google gefunden wird – lokale SEO-Optimierung inklusive.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Google My Business</li>
+                        <li><i class="fas fa-check"></i> Lokale Keywords</li>
+                        <li><i class="fas fa-check"></i> Meta-Optimierung</li>
+                    </ul>
+                </div>
+                <div class="service-card" data-animate data-delay="0">
+                    <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Mobile First</h3>
+                    <p>Über 70% der Besucher kommen über das Handy – deine Website sieht überall perfekt aus.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Touch-optimiert</li>
+                        <li><i class="fas fa-check"></i> Alle Bildschirmgrößen</li>
+                        <li><i class="fas fa-check"></i> Schnell mobil</li>
+                    </ul>
+                </div>
+                <div class="service-card" data-animate data-delay="100">
+                    <div class="service-icon"><i class="fas fa-pen-nib"></i></div>
+                    <h3>Content-Erstellung</h3>
+                    <p>Professionelle Texte und Bildauswahl, die deine Zielgruppe ansprechen und überzeugen.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> SEO-Texte</li>
+                        <li><i class="fas fa-check"></i> Bildoptimierung</li>
+                        <li><i class="fas fa-check"></i> Call-to-Actions</li>
+                    </ul>
+                </div>
+                <div class="service-card" data-animate data-delay="200">
+                    <div class="service-icon"><i class="fas fa-headset"></i></div>
+                    <h3>Wartung & Support</h3>
+                    <p>Nach dem Launch bin ich weiterhin für dich da – Updates, Änderungen und technischer Support.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Regelmäßige Updates</li>
+                        <li><i class="fas fa-check"></i> Backups</li>
+                        <li><i class="fas fa-check"></i> Schneller Support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PORTFOLIO ==================== -->
+    <section class="section" id="portfolio">
+        <div class="container">
+            <div class="section-header" data-animate>
+                <span class="section-tag">Portfolio</span>
+                <h2 class="section-title">Meine neuesten <span class="text-gradient">Projekte</span></h2>
+                <p class="section-subtitle">Überzeuge dich selbst von meiner Arbeit. Jedes Projekt wird individuell auf die Bedürfnisse des Kunden zugeschnitten.</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item featured" data-animate data-delay="0">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image">
+				 <img src="images/Elektriker.png"
+                 			alt="Elektroniker Website – Webdesign"
+                 				class="portfolio-preview">
+                            <div class="portfolio-placeholder">
+                                <div class="pp-browser">
+                                    <div class="pp-dots"><span></span><span></span><span></span></div>
+                                    <div class="pp-content">
+                                        <div class="pp-nav"></div>
+                                        <div class="pp-hero">
+                                            <div class="pp-title-block"></div>
+                                            <div class="pp-text-block"></div>
+                                            <div class="pp-btn-block"></div>
+                                        </div>
+                                        <div class="pp-grid">
+                                            <div class="pp-box"></div>
+                                            <div class="pp-box"></div>
+                                            <div class="pp-box"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="portfolio-overlay">
+                                <a href="Demos/Elektroniker.html" class="portfolio-link">Website ansehen <i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                            <span class="portfolio-featured-badge">Featured</span>
+                        </div>
+                        <div class="portfolio-info">
+                            <div class="portfolio-tags">
+                                <span>Webdesign</span>
+                                <span>Entwicklung</span>
+                                <span>SEO</span>
+                            </div>
+                            <h3>Elektroniker Beispiel</h3>
+                            <p>Professionelle Website mit Leistungsübersicht, Notdienst-Kontakt und Google Maps Integration.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-animate data-delay="100">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image">
+			 <img src="images/Handwerker.png"
+                 			alt="Handwerker Website – Webdesign"
+                 				class="portfolio-preview">
+                            <div class="portfolio-placeholder color-2">
+                                <div class="pp-browser">
+                                    <div class="pp-dots"><span></span><span></span><span></span></div>
+                                    <div class="pp-content">
+                                        <div class="pp-nav"></div>
+                                        <div class="pp-hero">
+                                            <div class="pp-title-block"></div>
+                                            <div class="pp-text-block"></div>
+                                            <div class="pp-btn-block"></div>
+                                        </div>
+                                        <div class="pp-grid">
+                                            <div class="pp-box"></div>
+                                            <div class="pp-box"></div>
+                                            <div class="pp-box"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="portfolio-overlay">
+                                <a href="Demos/Handwerker.html" class="portfolio-link">Website ansehen <i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                        <div class="portfolio-info">
+                            <div class="portfolio-tags">
+                                <span>Webdesign</span>
+                                <span>SEO</span>
+                            </div>
+                            <h3>Handwerksbetrieb</h3>
+                            <p>Professionelle Unternehmensseite mit Leistungsübersicht und Kontaktformular.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-animate data-delay="200">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image">
+			 <img src="images/Friseur.png"
+                 			alt="Friseur Website – Webdesign"
+                 				class="portfolio-preview">
+							<div class="portfolio-placeholder color-3">
+                                <div class="pp-browser">
+                                    <div class="pp-dots"><span></span><span></span><span></span></div>
+                                    <div class="pp-content">
+                                        <div class="pp-nav"></div>
+                                        <div class="pp-hero">
+                                            <div class="pp-title-block"></div>
+                                            <div class="pp-text-block"></div>
+                                            <div class="pp-btn-block"></div>
+                                        </div>
+                                        <div class="pp-grid">
+                                            <div class="pp-box"></div>
+                                            <div class="pp-box"></div>
+                                            <div class="pp-box"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="portfolio-overlay">
+                                <a href="Demos/Friseur.html" class="portfolio-link">Website ansehen <i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                        <div class="portfolio-info">
+                            <div class="portfolio-tags">
+                                <span>Webdesign</span>
+                                <span>Mobile</span>
+                            </div>
+                            <h3>Friseursalon</h3>
+                            <p>Stilvolle Website mit Online-Terminbuchung und Galerie der Arbeiten.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PROCESS ==================== -->
+    <section class="process section" id="process">
+        <div class="container">
+            <div class="section-header" data-animate>
+                <span class="section-tag">Ablauf</span>
+                <h2 class="section-title">In 4 Schritten zur <span class="text-gradient">Website</span></h2>
+                <p class="section-subtitle">Ein einfacher, transparenter Prozess – damit du immer weißt, was als Nächstes kommt.</p>
+            </div>
+            <div class="process-timeline">
+                <div class="process-line"></div>
+                <div class="process-step" data-animate data-delay="0">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <div class="step-icon"><i class="fas fa-comments"></i></div>
+                        <h3>Kostenloses Erstgespräch</h3>
+                        <p>Wir besprechen deine Wünsche, Ziele und Anforderungen. Ich berate dich ehrlich und unverbindlich.</p>
+                    </div>
+                </div>
+                <div class="process-step" data-animate data-delay="100">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <div class="step-icon"><i class="fas fa-pencil-ruler"></i></div>
+                        <h3>Konzept & Design</h3>
+                        <p>Ich erstelle ein maßgeschneidertes Design-Konzept. Du bekommst einen Entwurf zur Abstimmung.</p>
+                    </div>
+                </div>
+                <div class="process-step" data-animate data-delay="200">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <div class="step-icon"><i class="fas fa-code"></i></div>
+                        <h3>Entwicklung</h3>
+                        <p>Deine Website wird programmiert – schnell, responsive und SEO-optimiert. Regelmäßige Updates zum Fortschritt.</p>
+                    </div>
+                </div>
+                <div class="process-step" data-animate data-delay="300">
+                    <div class="step-number">04</div>
+                    <div class="step-content">
+                        <div class="step-icon"><i class="fas fa-rocket"></i></div>
+                        <h3>Launch & Support</h3>
+                        <p>Deine Website geht live! Danach biete ich fortlaufende Wartung und Support für dich an.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PRICING ==================== -->
+    <section class="section" id="pricing">
+        <div class="container">
+            <div class="section-header" data-animate>
+                <span class="section-tag">Preise</span>
+                <h2 class="section-title">Transparente <span class="text-gradient">Festpreise</span></h2>
+                <p class="section-subtitle">Keine versteckten Kosten. Du weißt vorher genau, was du bekommst und was es kostet.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card" data-animate data-delay="0">
+                    <div class="pricing-header">
+                        <h3>Starter</h3>
+                        <p class="pricing-desc">Perfekt für den Einstieg</p>
+                        <div class="pricing-price">
+                            <span class="price-currency">€</span>
+                            <span class="price-amount">499</span>
+                        </div>
+                        <span class="price-note">einmalig</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> One-Page Website</li>
+                        <li><i class="fas fa-check"></i> Responsive Design</li>
+                        <li><i class="fas fa-check"></i> Kontaktformular</li>
+                        <li><i class="fas fa-check"></i> SEO Grundoptimierung</li>
+                        <li><i class="fas fa-check"></i> Google Maps</li>
+                        <li class="disabled"><i class="fas fa-times"></i> Mehrere Unterseiten</li>
+                        <li class="disabled"><i class="fas fa-times"></i> Blog-Funktion</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline btn-block">Jetzt anfragen</a>
+                </div>
+                <div class="pricing-card popular" data-animate data-delay="100">
+                    <span class="popular-badge">Beliebt</span>
+                    <div class="pricing-header">
+                        <h3>Business</h3>
+                        <p class="pricing-desc">Für wachsende Unternehmen</p>
+                        <div class="pricing-price">
+                            <span class="price-currency">€</span>
+                            <span class="price-amount">999</span>
+                        </div>
+                        <span class="price-note">einmalig</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Bis zu 5 Unterseiten</li>
+                        <li><i class="fas fa-check"></i> Premium Design</li>
+                        <li><i class="fas fa-check"></i> Kontaktformular</li>
+                        <li><i class="fas fa-check"></i> SEO-Optimierung</li>
+                        <li><i class="fas fa-check"></i> Google Maps</li>
+                        <li><i class="fas fa-check"></i> Social Media Integration</li>
+                        <li><i class="fas fa-check"></i> 3 Monate Support</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary btn-block">Jetzt anfragen</a>
+                </div>
+                <div class="pricing-card" data-animate data-delay="200">
+                    <div class="pricing-header">
+                        <h3>Premium</h3>
+                        <p class="pricing-desc">Das Komplettpaket</p>
+                        <div class="pricing-price">
+                            <span class="price-currency">€</span>
+                            <span class="price-amount">1.999</span>
+                        </div>
+                        <span class="price-note">einmalig</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Unbegrenzte Seiten</li>
+                        <li><i class="fas fa-check"></i> Exklusives Design</li>
+                        <li><i class="fas fa-check"></i> CMS / Blog</li>
+                        <li><i class="fas fa-check"></i> Erweiterte SEO</li>
+                        <li><i class="fas fa-check"></i> Terminbuchung</li>
+                        <li><i class="fas fa-check"></i> Analytics Dashboard</li>
+                        <li><i class="fas fa-check"></i> 6 Monate Support</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline btn-block">Jetzt anfragen</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TESTIMONIALS ==================== -->
+    <section class="testimonials section" id="testimonials">
+        <div class="container">
+            <div class="section-header" data-animate>
+                <span class="section-tag">Referenzen</span>
+                <h2 class="section-title">Das sagen meine <span class="text-gradient">Kunden</span></h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card" data-animate data-delay="0">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Unsere neue Website hat unsere Anfragen verdreifacht! Die Zusammenarbeit war super professionell und unkompliziert."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MK</div>
+                        <div>
+                            <span class="author-name">Max Kunze</span>
+                            <span class="author-role">Inhaber, Kunze Malerbetrieb</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card" data-animate data-delay="100">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Endlich eine Website, die auch auf dem Handy toll aussieht! Unsere Kunden buchen jetzt direkt online Termine."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SB</div>
+                        <div>
+                            <span class="author-name">Sarah Bauer</span>
+                            <span class="author-role">Inhaberin, Salon Bella</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card" data-animate data-delay="200">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Von der Beratung bis zum Go-Live alles top. Wir werden jetzt bei Google gefunden und haben 40% mehr Laufkundschaft."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">TW</div>
+                        <div>
+                            <span class="author-name">Thomas Weber</span>
+                            <span class="author-role">Geschäftsführer, Café Central</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FAQ ==================== -->
+    <section class="section" id="faq">
+        <div class="container">
+            <div class="section-header" data-animate>
+                <span class="section-tag">FAQ</span>
+                <h2 class="section-title">Häufig gestellte <span class="text-gradient">Fragen</span></h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item" data-animate>
+                    <button class="faq-question">
+                        Wie lange dauert es, bis meine Website fertig ist?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>In der Regel dauert es 1–3 Wochen, je nach Umfang des Projekts. Eine einfache One-Page Website kann oft schon in einer Woche fertig sein.</p>
+                    </div>
+                </div>
+                <div class="faq-item" data-animate>
+                    <button class="faq-question">
+                        Muss ich selbst Texte und Bilder liefern?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Nicht unbedingt! Ich kann die Texterstellung und Bildauswahl für dich übernehmen. Natürlich sind eigene Fotos und Informationen immer ein Plus.</p>
+                    </div>
+                </div>
+                <div class="faq-item" data-animate>
+                    <button class="faq-question">
+                        Was kostet die monatliche Wartung?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Kleine Änderungen und Updates sind oft im Support-Zeitraum inbegriffen. Darüber hinaus biete ich Wartungspakete ab 29€/Monat an.</p>
+                    </div>
+                </div>
+                <div class="faq-item" data-animate>
+                    <button class="faq-question">
+                        Kann ich die Website später selbst bearbeiten?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Ja! Ab dem Business-Paket gibt es die Möglichkeit, ein einfaches CMS einzubauen, mit dem du Texte, Bilder und mehr selbst ändern kannst.</p>
+                    </div>
+                </div>
+                <div class="faq-item" data-animate>
+                    <button class="faq-question">
+                        Kommen noch Kosten für Hosting und Domain dazu?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Die Domain kostet ca. 10–15€ pro Jahr, das Hosting ca. 5–10€ pro Monat. Ich berate dich gerne zu den besten Optionen für dein Budget.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CONTACT ==================== -->
+    <section class="contact section" id="contact">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-info" data-animate>
+                    <span class="section-tag">Kontakt</span>
+                    <h2 class="section-title">Lass uns über dein <span class="text-gradient">Projekt sprechen</span></h2>
+                    <p>Du hast eine Idee oder Fragen? Schreib mir einfach – ich melde mich innerhalb von 24 Stunden bei dir.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <span class="contact-label">E-Mail</span>
+                                <a href="mailto:sasjadesign@gmail.com">sasjadesign@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                            <div>
+                                <span class="contact-label">Telefon</span>
+                                <a href="tel:+4915123456789">+49 151 2345 6789</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>
+                                <span class="contact-label">Standort</span>
+                                <span>Deine Stadt, Deutschland</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper" data-animate="fade-left">
+                    <form class="contact-form" id="contactForm" action="https://formspree.io/f/mkoveqnz" method="POST">
+                        <div class="form-group">
+                            <label for="name">Name *</label>
+                            <input type="text" id="name" name="name" required placeholder="Dein Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-Mail *</label>
+                            <input type="email" id="email" name="email" required placeholder="deine@email.de">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Telefon (optional)</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+49 151 ...">
+                        </div>
+                        <div class="form-group">
+                            <label for="package">Gewünschtes Paket</label>
+                            <select id="package" name="package">
+                                <option value="">Bitte wählen...</option>
+                                <option value="Starter">Starter (499€)</option>
+                                <option value="Business">Business (999€)</option>
+                                <option value="Premium">Premium (1.999€)</option>
+                                <option value="Individuell">Individuell</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="message">Nachricht *</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Erzähl mir von deinem Projekt..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg">Nachricht senden <i class="fas fa-paper-plane"></i></button>
+                    </form>
+                    <div class="form-success" id="formSuccess" style="display: none;">
+                        <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+                        <h3>Nachricht gesendet!</h3>
+                        <p>Vielen Dank für deine Anfrage. Ich melde mich innerhalb von 24 Stunden bei dir.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA ==================== -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box" data-animate>
+                <h2>Bereit für deine neue Website?</h2>
+                <p>Starte jetzt mit einem kostenlosen Beratungsgespräch – unverbindlich und ohne Risiko.</p>
+                <a href="#contact" class="btn btn-white btn-lg">Jetzt starten <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#hero" class="logo">
+                        <span class="logo-icon">&lt;/&gt;</span>
+                        <span class="logo-text">SasjaDesign<span class="logo-dot">.</span></span>
+                    </a>
+                    <p>Professionelles Webdesign für lokale Unternehmen. Damit du online gefunden wirst.</p>
+                </div>
+                <div class="footer-links-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="#services">Leistungen</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#process">Ablauf</a></li>
+                        <li><a href="#pricing">Preise</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-col">
+                    <h4>Kontakt</h4>
+                    <ul>
+                        <li><a href="mailto:sasjadesign@gmail.com">sasjadesign@gmail.com</a></li>
+                       <a><span>+49 151 2345 6789</span></a>
+                       
+                        <li><span>Deine Stadt, DE</span></li>
+                    </ul>
+                </div>
+              <div class="footer-links-col">
+    <h4>Rechtliches</h4>
+    <ul>
+        <li><a href="impressum.html">Impressum</a></li>
+        <li><a href="datenschutz.html">Datenschutz</a></li>
+        <li><a href="#" class="reopen-cookie-settings">Cookie-Einstellungen</a></li>
+    </ul>
+</div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> SasjaDesign. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== FIXED BUTTONS ==================== -->
+    <button class="back-to-top" id="backToTop" aria-label="Nach oben scrollen">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+
+    <button id="theme-toggle" aria-label="Dark Mode umschalten">🌙</button>
+
+    <!-- ==================== COOKIE CONSENT BANNER ==================== -->
+    <div class="cookie-overlay" id="cookieOverlay">
+        <div class="cookie-modal" id="cookieBanner">
+            <div class="cookie-modal-header">
+                <div class="cookie-icon">🍪</div>
+                <div class="cookie-modal-header-text">
+                    <h3>Wir respektieren deine Privatsphäre</h3>
+                    <p>Diese Website verwendet Cookies, um dir die bestmögliche Erfahrung zu bieten. Notwendige Cookies sorgen dafür, dass die Website funktioniert. Optionale Cookies helfen uns, die Website zu verbessern.</p>
+                    <button class="cookie-details-toggle" id="cookieDetailsToggle">
+                        <span>Details anzeigen</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="cookie-details" id="cookieDetails">
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div class="cookie-category-info">
+                            <h4>Notwendige Cookies</h4>
+                            <p>Für Dark Mode, Cookie-Einstellungen und grundlegende Funktionen. Können nicht deaktiviert werden.</p>
+                        </div>
+                        <label class="cookie-switch disabled">
+                            <input type="checkbox" checked disabled>
+                            <span class="cookie-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div class="cookie-category-info">
+                            <h4>Analyse Cookies</h4>
+                            <p>Helfen uns zu verstehen, wie Besucher die Website nutzen (z.B. Google Analytics).</p>
+                        </div>
+                        <label class="cookie-switch">
+                            <input type="checkbox" id="cookieAnalytics">
+                            <span class="cookie-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div class="cookie-category-info">
+                            <h4>Externe Medien</h4>
+                            <p>Ermöglicht das Laden externer Inhalte wie Google Fonts, YouTube-Videos etc.</p>
+                        </div>
+                        <label class="cookie-switch">
+                            <input type="checkbox" id="cookieExternal">
+                            <span class="cookie-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cookie-actions">
+                <button class="cookie-btn cookie-btn-reject" id="cookieReject">Nur Notwendige</button>
+                <button class="cookie-btn cookie-btn-save" id="cookieSave" style="display:none;">Auswahl speichern</button>
+                <button class="cookie-btn cookie-btn-accept" id="cookieAccept">Alle akzeptieren</button>
+            </div>
+
+            <div class="cookie-footer-links">
+                <a href="datenschutz.html">Datenschutzerklärung</a>
+                <span>|</span>
+                <a href="impressum.html">Impressum</a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="js/script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

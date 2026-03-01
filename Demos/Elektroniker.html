@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elektro Müller – Ihr Elektroniker in Bautzen</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        *{font-family:'Inter',sans-serif;scroll-behavior:smooth;margin:0;padding:0;box-sizing:border-box}
+        body{overflow-x:hidden;background:#0f172a;color:#e2e8f0}
+
+        /* PAGE SYSTEM – instant with quick fade */
+        .page{display:none;min-height:100vh;opacity:0;transition:opacity .15s ease}
+        .page.active{display:block;opacity:1}
+        .page.fade-out{opacity:0}
+
+        /* LOADER – fast */
+        .loader-wrapper{position:fixed;inset:0;z-index:9999;background:#0f172a;display:flex;align-items:center;justify-content:center;transition:opacity .3s,visibility .3s}
+        .loader-wrapper.hidden{opacity:0;visibility:hidden;pointer-events:none}
+        .loader-bolt{font-size:44px;color:#f59e0b;animation:loaderPulse .6s infinite ease-in-out}
+        @keyframes loaderPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.2);opacity:.6}}
+
+        .scroll-progress{position:fixed;top:0;left:0;height:3px;z-index:100;background:linear-gradient(90deg,#f59e0b,#d97706);width:0%;transition:width .05s linear}
+
+        .hero-gradient{background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%)}
+        .accent-gradient{background:linear-gradient(135deg,#f59e0b,#d97706)}
+        .hero-gradient::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(245,158,11,.12) 1px,transparent 0);background-size:40px 40px;pointer-events:none}
+
+        .particle{position:absolute;border-radius:50%;pointer-events:none;background:rgba(245,158,11,.3);animation:particleFloat linear infinite}
+        @keyframes particleFloat{0%{transform:translateY(0) rotate(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-100vh) rotate(720deg);opacity:0}}
+
+        .glow-amber{box-shadow:0 0 40px rgba(245,158,11,.2)}
+        .glow-amber-sm{box-shadow:0 0 20px rgba(245,158,11,.15)}
+        .text-glow{text-shadow:0 0 40px rgba(245,158,11,.3)}
+
+        .service-card{transition:all .3s ease;border:1px solid rgba(245,158,11,.1)}
+        .service-card:hover{transform:translateY(-6px);border-color:rgba(245,158,11,.4);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+        .service-card:hover .service-icon{transform:scale(1.1);box-shadow:0 0 30px rgba(245,158,11,.4)}
+        .service-icon{transition:all .3s ease}
+
+        .img-overlay{position:relative;overflow:hidden}
+        .img-overlay img{transition:transform .4s ease}
+        .img-overlay:hover img{transform:scale(1.05)}
+
+        .stat-item{position:relative}
+        .stat-item::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:40px;height:3px;background:linear-gradient(90deg,#f59e0b,#d97706);border-radius:2px}
+
+        .navbar{transition:background .2s,box-shadow .2s;backdrop-filter:blur(20px)}
+        .navbar.scrolled{background:rgba(15,23,42,.95);box-shadow:0 4px 30px rgba(0,0,0,.3)}
+        .nav-link{position:relative;transition:color .2s;cursor:pointer}
+        .nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:#f59e0b;transition:width .2s}
+        .nav-link:hover::after{width:100%}
+        .nav-link.active-link{color:#f59e0b}
+        .nav-link.active-link::after{width:100%}
+
+        /* FAST animations: .4s instead of .8s */
+        .fade-up{opacity:0;transform:translateY(30px);transition:opacity .4s ease,transform .4s ease}
+        .fade-up.visible{opacity:1;transform:translateY(0)}
+        .fade-left{opacity:0;transform:translateX(-30px);transition:opacity .4s ease,transform .4s ease}
+        .fade-left.visible{opacity:1;transform:translateX(0)}
+        .fade-right{opacity:0;transform:translateX(30px);transition:opacity .4s ease,transform .4s ease}
+        .fade-right.visible{opacity:1;transform:translateX(0)}
+        .scale-in{opacity:0;transform:scale(.9);transition:opacity .35s ease,transform .35s ease}
+        .scale-in.visible{opacity:1;transform:scale(1)}
+
+        .btn-primary{background:linear-gradient(135deg,#f59e0b,#d97706);transition:all .2s;position:relative;overflow:hidden}
+        .btn-primary::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transition:left .4s}
+        .btn-primary:hover::before{left:100%}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(245,158,11,.3)}
+        .btn-outline{border:2px solid #f59e0b;color:#f59e0b;transition:all .2s}
+        .btn-outline:hover{background:#f59e0b;color:#0f172a;transform:translateY(-2px)}
+
+        .testimonial-card{background:linear-gradient(135deg,rgba(30,41,59,.8),rgba(15,23,42,.8));border:1px solid rgba(245,158,11,.1);transition:all .2s}
+        .testimonial-card:hover{border-color:rgba(245,158,11,.3)}
+
+        .gallery-item{overflow:hidden;border-radius:12px;cursor:pointer}
+        .gallery-item img{transition:transform .4s ease}
+        .gallery-item:hover img{transform:scale(1.08)}
+        .gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,23,42,.8) 0%,transparent 60%);opacity:0;transition:opacity .2s;display:flex;align-items:flex-end;padding:1.5rem}
+        .gallery-item:hover .gallery-overlay{opacity:1}
+
+        .lightbox{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;backdrop-filter:blur(10px)}
+        .lightbox.active{display:flex}
+        .lightbox img{max-width:90%;max-height:85vh;border-radius:12px}
+        .lightbox-close{position:absolute;top:20px;right:20px;width:48px;height:48px;border-radius:50%;background:rgba(245,158,11,.2);border:1px solid rgba(245,158,11,.4);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+        .lightbox-close:hover{background:#f59e0b;color:#0f172a}
+        .lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:rgba(245,158,11,.2);border:1px solid rgba(245,158,11,.4);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+        .lightbox-nav:hover{background:#f59e0b;color:#0f172a}
+        .lightbox-prev{left:20px}
+        .lightbox-next{right:20px}
+        .lightbox-caption{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);text-align:center;color:#fff}
+
+        .form-input{background:rgba(30,41,59,.5);border:1px solid rgba(245,158,11,.2);transition:all .2s;color:#e2e8f0}
+        .form-input:focus{border-color:#f59e0b;box-shadow:0 0 20px rgba(245,158,11,.15);outline:none}
+        .form-input::placeholder{color:#64748b}
+
+        @keyframes pulseGlow{0%,100%{box-shadow:0 0 20px rgba(245,158,11,.2)}50%{box-shadow:0 0 40px rgba(245,158,11,.4)}}
+        .pulse-glow{animation:pulseGlow 3s infinite}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+        .float{animation:float 4s ease-in-out infinite}
+
+        .bolt-decoration{position:absolute;font-size:200px;opacity:.03;color:#f59e0b;pointer-events:none}
+
+        .mobile-menu{max-height:0;overflow:hidden;transition:max-height .25s ease}
+        .mobile-menu.open{max-height:500px}
+
+        .typewriter-cursor{display:inline-block;width:3px;height:1em;background:#f59e0b;margin-left:2px;animation:blink .8s step-end infinite;vertical-align:text-bottom}
+        @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+        .faq-item{border:1px solid rgba(245,158,11,.1);transition:border-color .2s}
+        .faq-item:hover{border-color:rgba(245,158,11,.3)}
+        .faq-item.active{border-color:rgba(245,158,11,.4)}
+        .faq-answer{max-height:0;overflow:hidden;transition:max-height .3s ease}
+        .faq-item.active .faq-answer{max-height:300px}
+        .faq-icon{transition:transform .2s}
+        .faq-item.active .faq-icon{transform:rotate(180deg)}
+
+        .team-card{border:1px solid rgba(245,158,11,.1);transition:all .3s ease}
+        .team-card:hover{border-color:rgba(245,158,11,.3);transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+
+        .blog-card{border:1px solid rgba(245,158,11,.1);transition:all .3s ease}
+        .blog-card:hover{border-color:rgba(245,158,11,.3);transform:translateY(-6px)}
+        .blog-card:hover .blog-img{transform:scale(1.05)}
+        .blog-img{transition:transform .4s ease}
+
+        .marquee-track{display:flex;gap:60px;animation:marquee 30s linear infinite}
+        @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+        .partner-logo{filter:grayscale(1) brightness(.6);transition:all .2s;opacity:.5}
+        .partner-logo:hover{filter:grayscale(0) brightness(1);opacity:1}
+
+        .cookie-banner{backdrop-filter:blur(20px);background:rgba(15,23,42,.95);border-top:1px solid rgba(245,158,11,.2)}
+
+        .floating-contact{position:fixed;bottom:24px;right:24px;z-index:50;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#d97706);display:flex;align-items:center;justify-content:center;color:#0f172a;font-size:22px;cursor:pointer;box-shadow:0 4px 20px rgba(245,158,11,.4);transition:all .2s;animation:pulseGlow 2s infinite}
+        .floating-contact:hover{transform:scale(1.1)}
+        .floating-menu{position:fixed;bottom:90px;right:24px;z-index:50;display:flex;flex-direction:column;gap:10px;opacity:0;transform:translateY(10px);pointer-events:none;transition:all .2s}
+        .floating-menu.active{opacity:1;transform:translateY(0);pointer-events:auto}
+        .floating-menu-item{display:flex;align-items:center;gap:10px;justify-content:flex-end}
+        .floating-menu-label{background:rgba(15,23,42,.95);color:#e2e8f0;padding:6px 14px;border-radius:8px;font-size:13px;font-weight:500;white-space:nowrap;border:1px solid rgba(245,158,11,.2)}
+        .floating-menu-btn{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .2s;box-shadow:0 4px 15px rgba(0,0,0,.3);text-decoration:none}
+        .floating-menu-btn:hover{transform:scale(1.1)}
+
+        .mobile-contact-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:60;background:rgba(15,23,42,.95);backdrop-filter:blur(20px);border-top:1px solid rgba(245,158,11,.2)}
+        @media(max-width:768px){.mobile-contact-bar{display:flex}.floating-contact,.floating-menu{display:none}}
+
+        .legal-content h3{color:#f59e0b;font-size:1.25rem;font-weight:700;margin-top:2rem;margin-bottom:.75rem}
+        .legal-content h4{color:#fff;font-size:1.1rem;font-weight:600;margin-top:1.5rem;margin-bottom:.5rem}
+        .legal-content p,.legal-content li{color:#94a3b8;line-height:1.8;margin-bottom:.75rem}
+        .legal-content ul{list-style:disc;padding-left:1.5rem;margin-bottom:1rem}
+        .legal-content a{color:#f59e0b;text-decoration:underline;cursor:pointer}
+
+        .page-header{padding-top:8rem;padding-bottom:4rem;background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%);position:relative}
+        .page-header::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(245,158,11,.08) 1px,transparent 0);background-size:40px 40px;pointer-events:none}
+        .breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:#64748b;margin-bottom:1rem}
+        .breadcrumb a{color:#94a3b8;transition:color .2s;cursor:pointer}
+        .breadcrumb a:hover{color:#f59e0b}
+
+        /* Placeholder for images while loading */
+        img{background:#1e293b}
+    </style>
+</head>
+<body>
+
+<!-- LOADER – fast 300ms -->
+<div class="loader-wrapper" id="loader">
+    <div class="text-center">
+        <i class="fas fa-bolt loader-bolt"></i>
+        <p class="text-gray-400 text-sm mt-3 tracking-widest uppercase">Lädt...</p>
+    </div>
+</div>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar fixed top-0 w-full z-50 bg-transparent" id="navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+            <a onclick="navigateTo('home')" class="flex items-center space-x-3 cursor-pointer">
+                <div class="w-10 h-10 rounded-lg accent-gradient flex items-center justify-center"><i class="fas fa-bolt text-gray-900 text-xl"></i></div>
+                <div><span class="text-xl font-bold text-white">Elektro</span><span class="text-xl font-bold text-yellow-500"> Müller</span></div>
+            </a>
+            <div class="hidden lg:flex items-center space-x-8">
+                <span onclick="navigateTo('home')" class="nav-link text-gray-300 hover:text-yellow-500 text-sm" data-page="home">Start</span>
+                <span onclick="navigateTo('leistungen')" class="nav-link text-gray-300 hover:text-yellow-500 text-sm" data-page="leistungen">Leistungen</span>
+                <span onclick="navigateTo('ueber-uns')" class="nav-link text-gray-300 hover:text-yellow-500 text-sm" data-page="ueber-uns">Über uns</span>
+                <span onclick="navigateTo('galerie')" class="nav-link text-gray-300 hover:text-yellow-500 text-sm" data-page="galerie">Galerie</span>
+                <span onclick="navigateTo('bewertungen')" class="nav-link text-gray-300 hover:text-yellow-500 text-sm" data-page="bewertungen">Bewertungen</span>
+                <span onclick="navigateTo('faq')" class="nav-link text-gray-300 hover:text-yellow-500 text-sm" data-page="faq">FAQ</span>
+                <span onclick="navigateTo('blog')" class="nav-link text-gray-300 hover:text-yellow-500 text-sm" data-page="blog">Blog</span>
+                <span onclick="navigateTo('kontakt')" class="btn-primary text-gray-900 font-semibold px-6 py-2.5 rounded-lg text-sm cursor-pointer inline-block">Kontakt</span>
+            </div>
+            <button class="lg:hidden text-white text-2xl" onclick="toggleMenu()"><i class="fas fa-bars" id="menu-icon"></i></button>
+        </div>
+        <div class="mobile-menu lg:hidden" id="mobile-menu">
+            <div class="py-4 space-y-3 border-t border-gray-700">
+                <span onclick="navigateTo('home');toggleMenu()" class="block text-gray-300 hover:text-yellow-500 py-2 cursor-pointer">Start</span>
+                <span onclick="navigateTo('leistungen');toggleMenu()" class="block text-gray-300 hover:text-yellow-500 py-2 cursor-pointer">Leistungen</span>
+                <span onclick="navigateTo('ueber-uns');toggleMenu()" class="block text-gray-300 hover:text-yellow-500 py-2 cursor-pointer">Über uns</span>
+                <span onclick="navigateTo('galerie');toggleMenu()" class="block text-gray-300 hover:text-yellow-500 py-2 cursor-pointer">Galerie</span>
+                <span onclick="navigateTo('bewertungen');toggleMenu()" class="block text-gray-300 hover:text-yellow-500 py-2 cursor-pointer">Bewertungen</span>
+                <span onclick="navigateTo('faq');toggleMenu()" class="block text-gray-300 hover:text-yellow-500 py-2 cursor-pointer">FAQ</span>
+                <span onclick="navigateTo('blog');toggleMenu()" class="block text-gray-300 hover:text-yellow-500 py-2 cursor-pointer">Blog</span>
+                <span onclick="navigateTo('kontakt');toggleMenu()" class="block btn-primary text-gray-900 font-semibold px-6 py-2.5 rounded-lg text-center mt-2 cursor-pointer">Kontakt</span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ==================== HOME ==================== -->
+<div class="page" id="page-home">
+    <section class="hero-gradient relative min-h-screen flex items-center overflow-hidden">
+        <div id="particles" class="absolute inset-0 pointer-events-none"></div>
+        <i class="bolt-decoration fas fa-bolt" style="top:10%;right:5%;transform:rotate(15deg)"></i>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 w-full relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-up">
+                    <div class="inline-flex items-center space-x-2 bg-yellow-500 bg-opacity-10 border border-yellow-500 border-opacity-30 rounded-full px-4 py-1.5 mb-6">
+                        <span class="w-2 h-2 bg-yellow-500 rounded-full"></span>
+                        <span class="text-yellow-500 text-sm font-medium">Meisterbetrieb seit 2005</span>
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 text-glow">
+                        Ihr <span class="text-yellow-500" id="typewriter"></span><span class="typewriter-cursor"></span><br>in Bautzen
+                    </h1>
+                    <p class="text-gray-400 text-lg sm:text-xl mb-8 max-w-lg leading-relaxed">Professionelle Elektroinstallation, Smart Home Lösungen und Photovoltaik – zuverlässig, sicher und fair.</p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <span onclick="navigateTo('kontakt')" class="btn-primary text-gray-900 font-bold px-8 py-4 rounded-xl text-center text-lg cursor-pointer"><i class="fas fa-paper-plane mr-2"></i> Jetzt anfragen</span>
+                        <span onclick="navigateTo('leistungen')" class="btn-outline font-semibold px-8 py-4 rounded-xl text-center text-lg cursor-pointer">Unsere Leistungen</span>
+                    </div>
+                    <div class="flex items-center space-x-6 mt-10 pt-8 border-t border-gray-700">
+                        <div class="flex -space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-yellow-600 flex items-center justify-center text-sm font-bold text-gray-900 border-2 border-gray-900">TM</div>
+                            <div class="w-10 h-10 rounded-full bg-yellow-500 flex items-center justify-center text-sm font-bold text-gray-900 border-2 border-gray-900">SK</div>
+                            <div class="w-10 h-10 rounded-full bg-yellow-400 flex items-center justify-center text-sm font-bold text-gray-900 border-2 border-gray-900">JW</div>
+                        </div>
+                        <div>
+                            <div class="flex text-yellow-500 text-sm mb-0.5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <span class="text-gray-400 text-sm">4.9/5 von über 200+ Kunden</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-right relative hidden md:block">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-yellow-500 bg-opacity-10 rounded-3xl blur-2xl"></div>
+                        <div class="relative rounded-2xl overflow-hidden glow-amber">
+                            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&h=700&fit=crop" alt="Elektriker" class="w-full h-auto object-cover rounded-2xl" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
+                        </div>
+                        <div class="absolute -bottom-4 -left-4 bg-gray-800 border border-yellow-500 border-opacity-30 rounded-2xl p-4 glow-amber-sm float">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 accent-gradient rounded-xl flex items-center justify-center"><i class="fas fa-shield-alt text-gray-900 text-xl"></i></div>
+                                <div><p class="text-white font-bold">Geprüft & Zertifiziert</p><p class="text-gray-400 text-sm">Meisterbetrieb</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-8 bg-gray-800 bg-opacity-50 border-t border-b border-gray-700 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-center gap-6 mb-6"><span class="text-gray-500 text-xs tracking-widest uppercase whitespace-nowrap">Vertrauen unserer Partner</span><div class="h-px bg-gray-700 flex-1"></div></div>
+            <div class="overflow-hidden"><div class="marquee-track">
+                <div class="partner-logo flex items-center gap-3 text-gray-400 text-lg font-bold whitespace-nowrap"><i class="fas fa-industry text-2xl"></i> Siemens AG</div>
+                <div class="partner-logo flex items-center gap-3 text-gray-400 text-lg font-bold whitespace-nowrap"><i class="fas fa-bolt text-2xl"></i> Hager</div>
+                <div class="partner-logo flex items-center gap-3 text-gray-400 text-lg font-bold whitespace-nowrap"><i class="fas fa-sun text-2xl"></i> SMA Solar</div>
+                <div class="partner-logo flex items-center gap-3 text-gray-400 text-lg font-bold whitespace-nowrap"><i class="fas fa-home text-2xl"></i> KNX</div>
+                <div class="partner-logo flex items-center gap-3 text-gray-400 text-lg font-bold whitespace-nowrap"><i class="fas fa-lightbulb text-2xl"></i> OSRAM</div>
+                <div class="partner-logo flex items-center gap-3 text-gray-400 text-lg font-bold whitespace-nowrap"><i class="fas fa-charging-station text-2xl"></i> Wallbox</div>
+                <div class="partner-logo flex items-center gap-3 text-gray-400 text-lg font-bold whitespace-nowrap"><i class="fas fa-solar-panel text-2xl"></i> Fronius</div>
+                <div class="partner-logo flex items-center gap-3 text-gray-400 text-lg font-bold whitespace-nowrap"><i class="fas fa-cog text-2xl"></i> ABB</div>
+                <div class="partner-logo flex items-center gap-3 text-gray-400 text-lg font-bold whitespace-nowrap"><i class="fas fa-industry text-2xl"></i> Siemens AG</div>
+                <div class="partner-logo flex items-center gap-3 text-gray-400 text-lg font-bold whitespace-nowrap"><i class="fas fa-bolt text-2xl"></i> Hager</div>
+                <div class="partner-logo flex items-center gap-3 text-gray-400 text-lg font-bold whitespace-nowrap"><i class="fas fa-sun text-2xl"></i> SMA Solar</div>
+                <div class="partner-logo flex items-center gap-3 text-gray-400 text-lg font-bold whitespace-nowrap"><i class="fas fa-home text-2xl"></i> KNX</div>
+                <div class="partner-logo flex items-center gap-3 text-gray-400 text-lg font-bold whitespace-nowrap"><i class="fas fa-lightbulb text-2xl"></i> OSRAM</div>
+                <div class="partner-logo flex items-center gap-3 text-gray-400 text-lg font-bold whitespace-nowrap"><i class="fas fa-charging-station text-2xl"></i> Wallbox</div>
+                <div class="partner-logo flex items-center gap-3 text-gray-400 text-lg font-bold whitespace-nowrap"><i class="fas fa-solar-panel text-2xl"></i> Fronius</div>
+                <div class="partner-logo flex items-center gap-3 text-gray-400 text-lg font-bold whitespace-nowrap"><i class="fas fa-cog text-2xl"></i> ABB</div>
+            </div></div>
+        </div>
+    </section>
+
+    <section class="py-16" style="background:linear-gradient(180deg,#111827,#0f172a)">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="bg-gray-800 bg-opacity-60 rounded-2xl border border-gray-700 p-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="stat-item text-center pb-4"><p class="text-3xl sm:text-4xl font-bold text-yellow-500 mb-1 counter-value" data-target="18">0</p><p class="text-gray-400 text-sm">Jahre Erfahrung</p></div>
+                <div class="stat-item text-center pb-4"><p class="text-3xl sm:text-4xl font-bold text-yellow-500 mb-1 counter-value" data-target="2500">0</p><p class="text-gray-400 text-sm">Projekte realisiert</p></div>
+                <div class="stat-item text-center pb-4"><p class="text-3xl sm:text-4xl font-bold text-yellow-500 mb-1 counter-value" data-target="200">0</p><p class="text-gray-400 text-sm">Zufriedene Kunden</p></div>
+                <div class="stat-item text-center pb-4"><p class="text-3xl sm:text-4xl font-bold text-yellow-500 mb-1 counter-value" data-target="12">0</p><p class="text-gray-400 text-sm">Fachkräfte im Team</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 relative overflow-hidden" style="background:linear-gradient(135deg,#92400e,#b45309,#d97706)">
+        <div class="absolute inset-0" style="background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,.1) 1px,transparent 0);background-size:30px 30px"></div>
+        <div class="max-w-5xl mx-auto px-4 text-center relative z-10 fade-up">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-white bg-opacity-20 rounded-full mb-6"><i class="fas fa-bolt text-white text-3xl"></i></div>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">Bereit für Ihr nächstes Projekt?</h2>
+            <p class="text-yellow-100 text-xl mb-8 max-w-2xl mx-auto">Kontaktieren Sie uns für eine kostenlose Beratung!</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <span onclick="navigateTo('kontakt')" class="inline-flex items-center justify-center bg-white text-yellow-700 font-bold px-10 py-5 rounded-xl text-lg hover:bg-gray-100 transition-all cursor-pointer shadow-lg"><i class="fas fa-paper-plane mr-3"></i> Kostenlos anfragen</span>
+                <a href="tel:+4935919876543" class="inline-flex items-center justify-center bg-transparent border-2 border-white text-white font-bold px-10 py-5 rounded-xl text-lg hover:bg-white hover:text-yellow-700 transition-all"><i class="fas fa-phone-alt mr-3"></i> 03591 / 98 765 43</a>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ==================== LEISTUNGEN ==================== -->
+<div class="page" id="page-leistungen">
+    <div class="page-header"><div class="max-w-7xl mx-auto px-4 relative z-10">
+        <div class="breadcrumb"><a onclick="navigateTo('home')">Start</a><i class="fas fa-chevron-right text-xs"></i><span class="text-yellow-500">Leistungen</span></div>
+        <h1 class="text-4xl sm:text-5xl font-bold text-white">Unsere <span class="text-yellow-500">Leistungen</span></h1>
+        <p class="text-gray-400 mt-4 text-lg max-w-2xl">Von der klassischen Elektroinstallation bis zur modernen Smart Home Lösung.</p>
+    </div></div>
+    <section class="py-24" style="background:linear-gradient(180deg,#0f172a,#111827)">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                <div class="service-card bg-gray-800 bg-opacity-60 rounded-2xl p-8 fade-up"><div class="service-icon w-16 h-16 accent-gradient rounded-2xl flex items-center justify-center mb-6"><i class="fas fa-plug text-gray-900 text-2xl"></i></div><h3 class="text-xl font-bold text-white mb-3">Elektroinstallation</h3><p class="text-gray-400 leading-relaxed mb-4">Komplette Neuinstallation und Sanierung von Elektroanlagen in Wohn- und Gewerbegebäuden.</p><span onclick="navigateTo('kontakt')" class="text-yellow-500 font-semibold text-sm cursor-pointer hover:text-yellow-400">Anfrage stellen <i class="fas fa-arrow-right ml-1"></i></span></div>
+                <div class="service-card bg-gray-800 bg-opacity-60 rounded-2xl p-8 fade-up"><div class="service-icon w-16 h-16 accent-gradient rounded-2xl flex items-center justify-center mb-6"><i class="fas fa-home text-gray-900 text-2xl"></i></div><h3 class="text-xl font-bold text-white mb-3">Smart Home</h3><p class="text-gray-400 leading-relaxed mb-4">Intelligente Haussteuerung für Licht, Heizung, Rollläden und Sicherheit – alles per App.</p><span onclick="navigateTo('kontakt')" class="text-yellow-500 font-semibold text-sm cursor-pointer hover:text-yellow-400">Anfrage stellen <i class="fas fa-arrow-right ml-1"></i></span></div>
+                <div class="service-card bg-gray-800 bg-opacity-60 rounded-2xl p-8 fade-up"><div class="service-icon w-16 h-16 accent-gradient rounded-2xl flex items-center justify-center mb-6"><i class="fas fa-solar-panel text-gray-900 text-2xl"></i></div><h3 class="text-xl font-bold text-white mb-3">Photovoltaik</h3><p class="text-gray-400 leading-relaxed mb-4">Planung und Installation von Solaranlagen inkl. Speichersystemen.</p><span onclick="navigateTo('kontakt')" class="text-yellow-500 font-semibold text-sm cursor-pointer hover:text-yellow-400">Anfrage stellen <i class="fas fa-arrow-right ml-1"></i></span></div>
+                <div class="service-card bg-gray-800 bg-opacity-60 rounded-2xl p-8 fade-up"><div class="service-icon w-16 h-16 accent-gradient rounded-2xl flex items-center justify-center mb-6"><i class="fas fa-charging-station text-gray-900 text-2xl"></i></div><h3 class="text-xl font-bold text-white mb-3">E-Mobilität</h3><p class="text-gray-400 leading-relaxed mb-4">Installation von Wallboxen und Ladestationen für Elektrofahrzeuge.</p><span onclick="navigateTo('kontakt')" class="text-yellow-500 font-semibold text-sm cursor-pointer hover:text-yellow-400">Anfrage stellen <i class="fas fa-arrow-right ml-1"></i></span></div>
+                <div class="service-card bg-gray-800 bg-opacity-60 rounded-2xl p-8 fade-up"><div class="service-icon w-16 h-16 accent-gradient rounded-2xl flex items-center justify-center mb-6"><i class="fas fa-lightbulb text-gray-900 text-2xl"></i></div><h3 class="text-xl font-bold text-white mb-3">Beleuchtungstechnik</h3><p class="text-gray-400 leading-relaxed mb-4">Moderne LED-Beleuchtungskonzepte für Innen- und Außenbereiche.</p><span onclick="navigateTo('kontakt')" class="text-yellow-500 font-semibold text-sm cursor-pointer hover:text-yellow-400">Anfrage stellen <i class="fas fa-arrow-right ml-1"></i></span></div>
+                <div class="service-card bg-gray-800 bg-opacity-60 rounded-2xl p-8 fade-up"><div class="service-icon w-16 h-16 accent-gradient rounded-2xl flex items-center justify-center mb-6"><i class="fas fa-network-wired text-gray-900 text-2xl"></i></div><h3 class="text-xl font-bold text-white mb-3">Netzwerktechnik</h3><p class="text-gray-400 leading-relaxed mb-4">Strukturierte Verkabelung und LAN/WLAN-Ausbau für Privat und Gewerbe.</p><span onclick="navigateTo('kontakt')" class="text-yellow-500 font-semibold text-sm cursor-pointer hover:text-yellow-400">Anfrage stellen <i class="fas fa-arrow-right ml-1"></i></span></div>
+            </div>
+            <div class="mt-24">
+                <div class="text-center mb-16 fade-up"><span class="text-yellow-500 font-semibold text-sm tracking-widest uppercase">So arbeiten wir</span><h2 class="text-3xl sm:text-4xl font-bold text-white mt-3">Unser <span class="text-yellow-500">Ablauf</span></h2></div>
+                <div class="grid md:grid-cols-4 gap-8">
+                    <div class="fade-up text-center"><div class="w-20 h-20 accent-gradient rounded-2xl flex items-center justify-center mx-auto mb-6"><span class="text-gray-900 text-2xl font-bold">01</span></div><h3 class="text-lg font-bold text-white mb-2">Kontaktaufnahme</h3><p class="text-gray-400 text-sm">Schildern Sie uns Ihr Anliegen per Telefon oder Formular.</p></div>
+                    <div class="fade-up text-center"><div class="w-20 h-20 accent-gradient rounded-2xl flex items-center justify-center mx-auto mb-6"><span class="text-gray-900 text-2xl font-bold">02</span></div><h3 class="text-lg font-bold text-white mb-2">Vor-Ort-Beratung</h3><p class="text-gray-400 text-sm">Wir besichtigen und beraten – kostenlos.</p></div>
+                    <div class="fade-up text-center"><div class="w-20 h-20 accent-gradient rounded-2xl flex items-center justify-center mx-auto mb-6"><span class="text-gray-900 text-2xl font-bold">03</span></div><h3 class="text-lg font-bold text-white mb-2">Angebot & Planung</h3><p class="text-gray-400 text-sm">Transparentes Festpreisangebot.</p></div>
+                    <div class="fade-up text-center"><div class="w-20 h-20 accent-gradient rounded-2xl flex items-center justify-center mx-auto mb-6"><span class="text-gray-900 text-2xl font-bold">04</span></div><h3 class="text-lg font-bold text-white mb-2">Umsetzung & Abnahme</h3><p class="text-gray-400 text-sm">Fachgerechte Ausführung und saubere Übergabe.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ==================== ÜBER UNS ==================== -->
+<div class="page" id="page-ueber-uns">
+    <div class="page-header"><div class="max-w-7xl mx-auto px-4 relative z-10">
+        <div class="breadcrumb"><a onclick="navigateTo('home')">Start</a><i class="fas fa-chevron-right text-xs"></i><span class="text-yellow-500">Über uns</span></div>
+        <h1 class="text-4xl sm:text-5xl font-bold text-white">Über <span class="text-yellow-500">uns</span></h1>
+        <p class="text-gray-400 mt-4 text-lg max-w-2xl">Tradition trifft auf Innovation – lernen Sie uns kennen.</p>
+    </div></div>
+    <section class="py-24" style="background:linear-gradient(180deg,#0f172a,#111827)">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-16 items-center mb-24">
+                <div class="fade-left relative">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-4">
+                            <div class="img-overlay rounded-2xl overflow-hidden"><img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=400&h=500&fit=crop" alt="" class="w-full h-64 object-cover" loading="lazy"></div>
+                            <div class="img-overlay rounded-2xl overflow-hidden"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=300&fit=crop" alt="" class="w-full h-40 object-cover" loading="lazy"></div>
+                        </div>
+                        <div class="space-y-4 mt-8">
+                            <div class="img-overlay rounded-2xl overflow-hidden"><img src="https://images.unsplash.com/photo-1555963966-b7ae5404b6ed?w=400&h=300&fit=crop" alt="" class="w-full h-40 object-cover" loading="lazy"></div>
+                            <div class="img-overlay rounded-2xl overflow-hidden"><img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=500&fit=crop" alt="" class="w-full h-64 object-cover" loading="lazy"></div>
+                        </div>
+                    </div>
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-900 border-2 border-yellow-500 rounded-full w-28 h-28 flex flex-col items-center justify-center pulse-glow z-10"><span class="text-2xl font-bold text-yellow-500">18+</span><span class="text-xs text-gray-300">Jahre</span></div>
+                </div>
+                <div class="fade-right">
+                    <span class="text-yellow-500 font-semibold text-sm tracking-widest uppercase">Unsere Geschichte</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mt-3 mb-6">Tradition trifft auf <span class="text-yellow-500">Innovation</span></h2>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-6">Seit 2005 sind wir Ihr zuverlässiger Partner für alle Elektroarbeiten in Bautzen und der gesamten Oberlausitz.</p>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-8">Unser Team aus 12 qualifizierten Fachkräften steht für höchste Qualität, Termintreue und faire Preise.</p>
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start space-x-4"><div class="w-10 h-10 accent-gradient rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"><i class="fas fa-check text-gray-900"></i></div><div><h4 class="text-white font-semibold">Zertifizierter Innungsbetrieb</h4><p class="text-gray-400 text-sm">Mitglied der Elektro-Innung Oberlausitz</p></div></div>
+                        <div class="flex items-start space-x-4"><div class="w-10 h-10 accent-gradient rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"><i class="fas fa-check text-gray-900"></i></div><div><h4 class="text-white font-semibold">TÜV-geprüft & VDE-konform</h4><p class="text-gray-400 text-sm">Alle Arbeiten nach aktuellen Sicherheitsnormen</p></div></div>
+                        <div class="flex items-start space-x-4"><div class="w-10 h-10 accent-gradient rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"><i class="fas fa-check text-gray-900"></i></div><div><h4 class="text-white font-semibold">Kostenlose Erstberatung</h4><p class="text-gray-400 text-sm">Transparente Angebote ohne versteckte Kosten</p></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mb-16 fade-up"><span class="text-yellow-500 font-semibold text-sm tracking-widest uppercase">Unser Team</span><h2 class="text-3xl sm:text-4xl font-bold text-white mt-3">Die <span class="text-yellow-500">Köpfe</span> dahinter</h2></div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="team-card bg-gray-800 bg-opacity-60 rounded-2xl overflow-hidden fade-up"><div class="h-56 bg-gradient-to-br from-yellow-600 to-yellow-800 flex items-center justify-center"><svg class="w-24 h-24 text-yellow-200 opacity-50" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div><div class="p-6"><h3 class="text-white font-bold text-lg">Thomas Müller</h3><p class="text-yellow-500 text-sm font-medium mb-2">Geschäftsführer & Meister</p><p class="text-gray-400 text-sm">Elektrotechnikmeister mit 25 Jahren Erfahrung.</p></div></div>
+                <div class="team-card bg-gray-800 bg-opacity-60 rounded-2xl overflow-hidden fade-up"><div class="h-56 bg-gradient-to-br from-yellow-500 to-yellow-700 flex items-center justify-center"><svg class="w-24 h-24 text-yellow-200 opacity-50" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div><div class="p-6"><h3 class="text-white font-bold text-lg">Stefan Koch</h3><p class="text-yellow-500 text-sm font-medium mb-2">Projektleiter</p><p class="text-gray-400 text-sm">Spezialist für Großprojekte seit 15 Jahren.</p></div></div>
+                <div class="team-card bg-gray-800 bg-opacity-60 rounded-2xl overflow-hidden fade-up"><div class="h-56 bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center"><svg class="w-24 h-24 text-yellow-200 opacity-50" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div><div class="p-6"><h3 class="text-white font-bold text-lg">Jana Weber</h3><p class="text-yellow-500 text-sm font-medium mb-2">Smart Home Expertin</p><p class="text-gray-400 text-sm">KNX-zertifiziert für intelligente Gebäudetechnik.</p></div></div>
+                <div class="team-card bg-gray-800 bg-opacity-60 rounded-2xl overflow-hidden fade-up"><div class="h-56 bg-gradient-to-br from-yellow-500 to-yellow-700 flex items-center justify-center"><svg class="w-24 h-24 text-yellow-200 opacity-50" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div><div class="p-6"><h3 class="text-white font-bold text-lg">Marco Richter</h3><p class="text-yellow-500 text-sm font-medium mb-2">PV-Spezialist</p><p class="text-gray-400 text-sm">Experte für Photovoltaik und Speichersysteme.</p></div></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ==================== GALERIE ==================== -->
+<div class="page" id="page-galerie">
+    <div class="page-header"><div class="max-w-7xl mx-auto px-4 relative z-10">
+        <div class="breadcrumb"><a onclick="navigateTo('home')">Start</a><i class="fas fa-chevron-right text-xs"></i><span class="text-yellow-500">Galerie</span></div>
+        <h1 class="text-4xl sm:text-5xl font-bold text-white">Projekt<span class="text-yellow-500">galerie</span></h1>
+        <p class="text-gray-400 mt-4 text-lg max-w-2xl">Klicken Sie auf ein Bild zum Vergrößern.</p>
+    </div></div>
+    <section class="py-24" style="background:linear-gradient(180deg,#0f172a,#111827)">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 fade-up">
+                <div class="gallery-item relative col-span-2 md:col-span-1 md:row-span-2" onclick="openLightbox(0)"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=800&fit=crop" alt="" class="w-full h-full object-cover" style="min-height:300px" loading="lazy"><div class="gallery-overlay"><div><p class="text-white font-bold">Schaltschrankbau</p><p class="text-gray-300 text-sm">Industrieanlage Bautzen-Nord</p></div></div></div>
+                <div class="gallery-item relative" onclick="openLightbox(1)"><img src="https://images.unsplash.com/photo-1558002038-1055907df827?w=600&h=400&fit=crop" alt="" class="w-full h-48 object-cover" loading="lazy"><div class="gallery-overlay"><div><p class="text-white font-bold">Smart Home</p><p class="text-gray-300 text-sm">Einfamilienhaus Bautzen</p></div></div></div>
+                <div class="gallery-item relative" onclick="openLightbox(2)"><img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&h=400&fit=crop" alt="" class="w-full h-48 object-cover" loading="lazy"><div class="gallery-overlay"><div><p class="text-white font-bold">PV-Anlage 15 kWp</p><p class="text-gray-300 text-sm">Wohnhaus Obergurig</p></div></div></div>
+                <div class="gallery-item relative" onclick="openLightbox(3)"><img src="https://images.unsplash.com/photo-1565608438257-fac3c27beb36?w=600&h=400&fit=crop" alt="" class="w-full h-48 object-cover" loading="lazy"><div class="gallery-overlay"><div><p class="text-white font-bold">Wallbox Installation</p><p class="text-gray-300 text-sm">Garage Bautzen-Süd</p></div></div></div>
+                <div class="gallery-item relative" onclick="openLightbox(4)"><img src="https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=600&h=400&fit=crop" alt="" class="w-full h-48 object-cover" loading="lazy"><div class="gallery-overlay"><div><p class="text-white font-bold">LED-Konzept</p><p class="text-gray-300 text-sm">Bürogebäude Bautzen</p></div></div></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ==================== BEWERTUNGEN ==================== -->
+<div class="page" id="page-bewertungen">
+    <div class="page-header"><div class="max-w-7xl mx-auto px-4 relative z-10">
+        <div class="breadcrumb"><a onclick="navigateTo('home')">Start</a><i class="fas fa-chevron-right text-xs"></i><span class="text-yellow-500">Bewertungen</span></div>
+        <h1 class="text-4xl sm:text-5xl font-bold text-white">Kunden<span class="text-yellow-500">stimmen</span></h1>
+    </div></div>
+    <section class="py-24" style="background:linear-gradient(180deg,#0f172a,#111827)">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="testimonial-card rounded-2xl p-8 fade-up"><div class="flex text-yellow-500 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="text-gray-300 leading-relaxed mb-6">„Super schneller und sauberer Service! Komplette Elektrik erneuert. Absolute Empfehlung!"</p><div class="flex items-center space-x-4"><div class="w-12 h-12 rounded-full accent-gradient flex items-center justify-center text-gray-900 font-bold">MK</div><div><p class="text-white font-semibold">Markus K.</p><p class="text-gray-500 text-sm">Elektrosanierung</p></div></div></div>
+                <div class="testimonial-card rounded-2xl p-8 fade-up"><div class="flex text-yellow-500 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="text-gray-300 leading-relaxed mb-6">„Herr Müller hat unsere PV-Anlage installiert und hervorragend beraten. Wir sparen deutlich Strom!"</p><div class="flex items-center space-x-4"><div class="w-12 h-12 rounded-full accent-gradient flex items-center justify-center text-gray-900 font-bold">SF</div><div><p class="text-white font-semibold">Sandra F.</p><p class="text-gray-500 text-sm">Photovoltaik</p></div></div></div>
+                <div class="testimonial-card rounded-2xl p-8 fade-up"><div class="flex text-yellow-500 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="text-gray-300 leading-relaxed mb-6">„Smart Home Installation war perfekt. Alles funktioniert tadellos per App!"</p><div class="flex items-center space-x-4"><div class="w-12 h-12 rounded-full accent-gradient flex items-center justify-center text-gray-900 font-bold">TW</div><div><p class="text-white font-semibold">Thomas W.</p><p class="text-gray-500 text-sm">Smart Home</p></div></div></div>
+                <div class="testimonial-card rounded-2xl p-8 fade-up"><div class="flex text-yellow-500 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><p class="text-gray-300 leading-relaxed mb-6">„Wallbox schnell und sauber installiert. Kompetente Beratung auch zur Förderung!"</p><div class="flex items-center space-x-4"><div class="w-12 h-12 rounded-full accent-gradient flex items-center justify-center text-gray-900 font-bold">KH</div><div><p class="text-white font-semibold">Katrin H.</p><p class="text-gray-500 text-sm">E-Mobilität</p></div></div></div>
+                <div class="testimonial-card rounded-2xl p-8 fade-up"><div class="flex text-yellow-500 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="text-gray-300 leading-relaxed mb-6">„LED-Beleuchtung in unserer Praxis sieht großartig aus und spart Energie. Danke!"</p><div class="flex items-center space-x-4"><div class="w-12 h-12 rounded-full accent-gradient flex items-center justify-center text-gray-900 font-bold">DR</div><div><p class="text-white font-semibold">Dr. Richter</p><p class="text-gray-500 text-sm">Beleuchtung</p></div></div></div>
+                <div class="testimonial-card rounded-2xl p-8 fade-up"><div class="flex text-yellow-500 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="text-gray-300 leading-relaxed mb-6">„Netzwerk läuft seit der Installation einwandfrei. Professionell und fair!"</p><div class="flex items-center space-x-4"><div class="w-12 h-12 rounded-full accent-gradient flex items-center justify-center text-gray-900 font-bold">PL</div><div><p class="text-white font-semibold">Peter L.</p><p class="text-gray-500 text-sm">Netzwerktechnik</p></div></div></div>
+            </div>
+            <div class="text-center mt-12"><div class="inline-flex items-center space-x-3 bg-gray-800 bg-opacity-60 border border-gray-700 rounded-full px-6 py-3"><span class="text-gray-400 text-sm">Google Bewertung:</span><div class="flex text-yellow-500"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><span class="text-white font-bold">4.9</span><span class="text-gray-500 text-sm">(207)</span></div></div>
+        </div>
+    </section>
+</div>
+
+<!-- ==================== FAQ ==================== -->
+<div class="page" id="page-faq">
+    <div class="page-header"><div class="max-w-7xl mx-auto px-4 relative z-10">
+        <div class="breadcrumb"><a onclick="navigateTo('home')">Start</a><i class="fas fa-chevron-right text-xs"></i><span class="text-yellow-500">FAQ</span></div>
+        <h1 class="text-4xl sm:text-5xl font-bold text-white">Häufige <span class="text-yellow-500">Fragen</span></h1>
+    </div></div>
+    <section class="py-24" style="background:linear-gradient(180deg,#0f172a,#111827)">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6">
+            <div class="space-y-4 fade-up">
+                <div class="faq-item bg-gray-800 bg-opacity-60 rounded-xl cursor-pointer" onclick="toggleFaq(this)"><div class="flex justify-between items-center px-6 py-5"><h3 class="text-white font-semibold pr-4">Wie schnell können Sie einen Termin einrichten?</h3><i class="fas fa-chevron-down text-yellow-500 faq-icon"></i></div><div class="faq-answer px-6"><p class="text-gray-400 pb-5">In der Regel innerhalb von 3–5 Werktagen. Bei Notfällen noch schneller.</p></div></div>
+                <div class="faq-item bg-gray-800 bg-opacity-60 rounded-xl cursor-pointer" onclick="toggleFaq(this)"><div class="flex justify-between items-center px-6 py-5"><h3 class="text-white font-semibold pr-4">Ist die Erstberatung wirklich kostenlos?</h3><i class="fas fa-chevron-down text-yellow-500 faq-icon"></i></div><div class="faq-answer px-6"><p class="text-gray-400 pb-5">Ja, komplett kostenlos und unverbindlich.</p></div></div>
+                <div class="faq-item bg-gray-800 bg-opacity-60 rounded-xl cursor-pointer" onclick="toggleFaq(this)"><div class="flex justify-between items-center px-6 py-5"><h3 class="text-white font-semibold pr-4">Welche Garantie erhalte ich?</h3><i class="fas fa-chevron-down text-yellow-500 faq-icon"></i></div><div class="faq-answer px-6"><p class="text-gray-400 pb-5">5 Jahre Gewährleistung auf Installationsarbeiten plus Herstellergarantien.</p></div></div>
+                <div class="faq-item bg-gray-800 bg-opacity-60 rounded-xl cursor-pointer" onclick="toggleFaq(this)"><div class="flex justify-between items-center px-6 py-5"><h3 class="text-white font-semibold pr-4">Lohnt sich eine Photovoltaikanlage?</h3><i class="fas fa-chevron-down text-yellow-500 faq-icon"></i></div><div class="faq-answer px-6"><p class="text-gray-400 pb-5">In den meisten Fällen ja! Wir erstellen individuelle Wirtschaftlichkeitsberechnungen.</p></div></div>
+                <div class="faq-item bg-gray-800 bg-opacity-60 rounded-xl cursor-pointer" onclick="toggleFaq(this)"><div class="flex justify-between items-center px-6 py-5"><h3 class="text-white font-semibold pr-4">In welchem Umkreis sind Sie tätig?</h3><i class="fas fa-chevron-down text-yellow-500 faq-icon"></i></div><div class="faq-answer px-6"><p class="text-gray-400 pb-5">Bautzen und Oberlausitz, ca. 50 km Umkreis inkl. Kamenz, Löbau, Zittau, Görlitz.</p></div></div>
+                <div class="faq-item bg-gray-800 bg-opacity-60 rounded-xl cursor-pointer" onclick="toggleFaq(this)"><div class="flex justify-between items-center px-6 py-5"><h3 class="text-white font-semibold pr-4">Kann man nachträglich zum Smart Home umrüsten?</h3><i class="fas fa-chevron-down text-yellow-500 faq-icon"></i></div><div class="faq-answer px-6"><p class="text-gray-400 pb-5">Absolut! Mit KNX RF oder Zigbee auch in Bestandsgebäuden möglich.</p></div></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ==================== BLOG ==================== -->
+<div class="page" id="page-blog">
+    <div class="page-header"><div class="max-w-7xl mx-auto px-4 relative z-10">
+        <div class="breadcrumb"><a onclick="navigateTo('home')">Start</a><i class="fas fa-chevron-right text-xs"></i><span class="text-yellow-500">Blog</span></div>
+        <h1 class="text-4xl sm:text-5xl font-bold text-white">News & <span class="text-yellow-500">Ratgeber</span></h1>
+    </div></div>
+    <section class="py-24" style="background:linear-gradient(180deg,#0f172a,#111827)">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="blog-card bg-gray-800 bg-opacity-60 rounded-2xl overflow-hidden fade-up"><div class="overflow-hidden h-48"><img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&h=300&fit=crop" alt="" class="blog-img w-full h-full object-cover" loading="lazy"></div><div class="p-6"><div class="flex items-center gap-3 mb-3"><span class="text-xs text-yellow-500 bg-yellow-500 bg-opacity-10 px-3 py-1 rounded-full font-medium">Ratgeber</span><span class="text-gray-500 text-xs">15. Feb 2026</span></div><h3 class="text-white font-bold text-lg mb-2">Photovoltaik 2026: Lohnt sich die Investition?</h3><p class="text-gray-400 text-sm">Welche Förderungen gibt es und wann rechnet sich eine Solaranlage?</p></div></div>
+                <div class="blog-card bg-gray-800 bg-opacity-60 rounded-2xl overflow-hidden fade-up"><div class="overflow-hidden h-48"><img src="https://images.unsplash.com/photo-1558002038-1055907df827?w=600&h=300&fit=crop" alt="" class="blog-img w-full h-full object-cover" loading="lazy"></div><div class="p-6"><div class="flex items-center gap-3 mb-3"><span class="text-xs text-yellow-500 bg-yellow-500 bg-opacity-10 px-3 py-1 rounded-full font-medium">Tipps</span><span class="text-gray-500 text-xs">02. Feb 2026</span></div><h3 class="text-white font-bold text-lg mb-2">5 Smart Home Funktionen, die begeistern</h3><p class="text-gray-400 text-sm">Von automatischem Licht bis zur intelligenten Heizung.</p></div></div>
+                <div class="blog-card bg-gray-800 bg-opacity-60 rounded-2xl overflow-hidden fade-up"><div class="overflow-hidden h-48"><img src="https://images.unsplash.com/photo-1565608438257-fac3c27beb36?w=600&h=300&fit=crop" alt="" class="blog-img w-full h-full object-cover" loading="lazy"></div><div class="p-6"><div class="flex items-center gap-3 mb-3"><span class="text-xs text-yellow-500 bg-yellow-500 bg-opacity-10 px-3 py-1 rounded-full font-medium">News</span><span class="text-gray-500 text-xs">20. Jan 2026</span></div><h3 class="text-white font-bold text-lg mb-2">Neue Förderung für Wallboxen in Sachsen</h3><p class="text-gray-400 text-sm">So erhalten Sie den Zuschuss für private Ladestationen.</p></div></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ==================== KONTAKT ==================== -->
+<div class="page" id="page-kontakt">
+    <div class="page-header"><div class="max-w-7xl mx-auto px-4 relative z-10">
+        <div class="breadcrumb"><a onclick="navigateTo('home')">Start</a><i class="fas fa-chevron-right text-xs"></i><span class="text-yellow-500">Kontakt</span></div>
+        <h1 class="text-4xl sm:text-5xl font-bold text-white">Kontaktieren Sie <span class="text-yellow-500">uns</span></h1>
+        <p class="text-gray-400 mt-4 text-lg max-w-2xl">Wir melden uns innerhalb von 24 Stunden.</p>
+    </div></div>
+    <section class="py-24" style="background:linear-gradient(180deg,#0f172a,#111827)">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-16">
+                <div class="fade-left">
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-5"><div class="w-14 h-14 accent-gradient rounded-2xl flex items-center justify-center flex-shrink-0"><i class="fas fa-map-marker-alt text-gray-900 text-xl"></i></div><div><h4 class="text-white font-semibold text-lg">Adresse</h4><p class="text-gray-400">Reichenstraße 42<br>02625 Bautzen</p></div></div>
+                        <div class="flex items-start space-x-5"><div class="w-14 h-14 accent-gradient rounded-2xl flex items-center justify-center flex-shrink-0"><i class="fas fa-phone-alt text-gray-900 text-xl"></i></div><div><h4 class="text-white font-semibold text-lg">Telefon</h4><p class="text-gray-400">03591 / 98 765 43</p></div></div>
+                        <div class="flex items-start space-x-5"><div class="w-14 h-14 accent-gradient rounded-2xl flex items-center justify-center flex-shrink-0"><i class="fas fa-envelope text-gray-900 text-xl"></i></div><div><h4 class="text-white font-semibold text-lg">E-Mail</h4><p class="text-gray-400">info@elektro-mueller-bautzen.de</p></div></div>
+                        <div class="flex items-start space-x-5"><div class="w-14 h-14 accent-gradient rounded-2xl flex items-center justify-center flex-shrink-0"><i class="fas fa-clock text-gray-900 text-xl"></i></div><div><h4 class="text-white font-semibold text-lg">Öffnungszeiten</h4><p class="text-gray-400">Mo – Fr: 07:00 – 17:00 Uhr<br>Sa: nach Vereinbarung</p></div></div>
+                    </div>
+                </div>
+                <div class="fade-right">
+                    <div class="bg-gray-800 bg-opacity-40 border border-gray-700 rounded-2xl p-8 sm:p-10">
+                        <h3 class="text-2xl font-bold text-white mb-2">Kostenlos anfragen</h3>
+                        <p class="text-gray-400 mb-8">Füllen Sie das Formular aus – wir melden uns schnellstmöglich.</p>
+                        <form onsubmit="handleSubmit(event)" id="contact-form">
+                            <div class="grid sm:grid-cols-2 gap-4 mb-4"><div><label class="text-gray-400 text-sm mb-2 block">Vorname *</label><input type="text" class="form-input w-full rounded-xl px-5 py-3.5" placeholder="Max" required></div><div><label class="text-gray-400 text-sm mb-2 block">Nachname *</label><input type="text" class="form-input w-full rounded-xl px-5 py-3.5" placeholder="Mustermann" required></div></div>
+                            <div class="mb-4"><label class="text-gray-400 text-sm mb-2 block">E-Mail *</label><input type="email" class="form-input w-full rounded-xl px-5 py-3.5" placeholder="max@beispiel.de" required></div>
+                            <div class="mb-4"><label class="text-gray-400 text-sm mb-2 block">Telefon</label><input type="tel" class="form-input w-full rounded-xl px-5 py-3.5" placeholder="03591 / ..."></div>
+                            <div class="mb-4"><label class="text-gray-400 text-sm mb-2 block">Leistung</label><select class="form-input w-full rounded-xl px-5 py-3.5"><option value="">Bitte wählen...</option><option>Elektroinstallation</option><option>Smart Home</option><option>Photovoltaik</option><option>E-Mobilität / Wallbox</option><option>Beleuchtungstechnik</option><option>Netzwerktechnik</option><option>Sonstiges</option></select></div>
+                            <div class="mb-6"><label class="text-gray-400 text-sm mb-2 block">Nachricht *</label><textarea class="form-input w-full rounded-xl px-5 py-3.5 h-32 resize-none" placeholder="Beschreiben Sie Ihr Anliegen..." required></textarea></div>
+                            <div class="flex items-start space-x-3 mb-6"><input type="checkbox" id="datenschutz" class="mt-1" style="accent-color:#f59e0b" required><label for="datenschutz" class="text-gray-400 text-sm">Ich habe die <a onclick="navigateTo('datenschutz')" class="text-yellow-500 underline cursor-pointer">Datenschutzerklärung</a> gelesen und stimme zu. *</label></div>
+                            <button type="submit" class="btn-primary w-full text-gray-900 font-bold px-8 py-4 rounded-xl text-lg" id="submit-btn"><i class="fas fa-paper-plane mr-2"></i> Nachricht senden</button>
+                        </form>
+                        <div id="success-msg" class="hidden mt-4 bg-green-900 bg-opacity-50 border border-green-600 text-green-300 rounded-xl p-4 text-center"><i class="fas fa-check-circle mr-2"></i> Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ==================== IMPRESSUM ==================== -->
+<div class="page" id="page-impressum">
+    <div class="page-header"><div class="max-w-7xl mx-auto px-4 relative z-10">
+        <div class="breadcrumb"><a onclick="navigateTo('home')">Start</a><i class="fas fa-chevron-right text-xs"></i><span class="text-yellow-500">Impressum</span></div>
+        <h1 class="text-4xl sm:text-5xl font-bold text-white"><span class="text-yellow-500">Impressum</span></h1>
+    </div></div>
+    <section class="py-24" style="background:linear-gradient(180deg,#0f172a,#111827)">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 legal-content">
+            <h3>Angaben gemäß § 5 DDG</h3>
+            <p><strong style="color:#fff">Elektro Müller</strong><br>Inh. Thomas Müller<br>Reichenstraße 42<br>02625 Bautzen</p>
+            <h3>Kontakt</h3>
+            <p>Telefon: 03591 / 98 765 43<br>E-Mail: info@elektro-mueller-bautzen.de</p>
+            <h3>Handwerksrolle</h3>
+            <p>Eingetragen in die Handwerksrolle der Handwerkskammer Dresden.<br>Betriebsnummer: 12345/678</p>
+            <h3>Berufsbezeichnung</h3>
+            <p>Berufsbezeichnung: Elektrotechnikmeister<br>Verliehen in: Deutschland (Freistaat Sachsen)<br>Zuständige Kammer: Handwerkskammer Dresden, Am Lagerplatz 8, 01099 Dresden<br>Es gelten die Regelungen der Handwerksordnung (HwO).</p>
+            <h3>Umsatzsteuer-ID</h3>
+            <p>USt-IdNr. gemäß § 27 a UStG: DE 123 456 789</p>
+            <h3>Verantwortlich nach § 18 Abs. 2 MStV</h3>
+            <p>Thomas Müller, Reichenstraße 42, 02625 Bautzen</p>
+            <h3>EU-Streitschlichtung</h3>
+            <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr/</a></p>
+            <h3>Verbraucherstreitbeilegung</h3>
+            <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+            <h3>Haftung für Inhalte</h3>
+            <p>Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte verantwortlich. Nach §§ 8 bis 10 DDG sind wir nicht verpflichtet, fremde Informationen zu überwachen. Bei Bekanntwerden von Rechtsverletzungen werden wir Inhalte umgehend entfernen.</p>
+            <h3>Haftung für Links</h3>
+            <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Betreiber verantwortlich. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p>
+            <h3>Urheberrecht</h3>
+            <p>Die Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung außerhalb des Urheberrechtes bedarf schriftlicher Zustimmung. Downloads sind nur für privaten Gebrauch gestattet.</p>
+            <p style="color:#64748b;margin-top:3rem;font-size:.875rem;">Stand: Februar 2026</p>
+        </div>
+    </section>
+</div>
+
+<!-- ==================== DATENSCHUTZ ==================== -->
+<div class="page" id="page-datenschutz">
+    <div class="page-header"><div class="max-w-7xl mx-auto px-4 relative z-10">
+        <div class="breadcrumb"><a onclick="navigateTo('home')">Start</a><i class="fas fa-chevron-right text-xs"></i><span class="text-yellow-500">Datenschutz</span></div>
+        <h1 class="text-4xl sm:text-5xl font-bold text-white"><span class="text-yellow-500">Datenschutzerklärung</span></h1>
+    </div></div>
+    <section class="py-24" style="background:linear-gradient(180deg,#0f172a,#111827)">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 legal-content">
+            <h3>1. Datenschutz auf einen Blick</h3>
+            <h4>Allgemeine Hinweise</h4>
+            <p>Die folgenden Hinweise geben einen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen.</p>
+            <p><strong style="color:#fff">Wer ist verantwortlich?</strong><br>Die Datenverarbeitung erfolgt durch den Websitebetreiber (s. Abschnitt „Verantwortliche Stelle").</p>
+            <p><strong style="color:#fff">Wie erfassen wir Ihre Daten?</strong><br>Ihre Daten werden erhoben, indem Sie uns diese mitteilen (z.B. Kontaktformular) oder automatisch beim Besuch (technische Daten wie Browser, Betriebssystem, Uhrzeit).</p>
+            <p><strong style="color:#fff">Ihre Rechte:</strong><br>Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit, Widerruf, Beschwerde bei der Aufsichtsbehörde.</p>
+
+            <h3>2. Verantwortliche Stelle</h3>
+            <p>Elektro Müller<br>Inh. Thomas Müller<br>Reichenstraße 42, 02625 Bautzen<br>Tel: 03591 / 98 765 43<br>E-Mail: info@elektro-mueller-bautzen.de</p>
+
+            <h3>3. Hosting</h3>
+            <p>Diese Website wird extern gehostet. Personenbezogene Daten werden auf Servern des Hosters gespeichert (IP-Adressen, Kontaktanfragen, Meta-Daten). Rechtsgrundlage: Art. 6 Abs. 1 lit. b und f DSGVO.</p>
+
+            <h3>4. Allgemeine Hinweise</h3>
+            <h4>Speicherdauer</h4>
+            <p>Daten verbleiben bei uns, bis der Verarbeitungszweck entfällt. Gesetzliche Aufbewahrungsfristen bleiben unberührt.</p>
+            <h4>Rechtsgrundlagen</h4>
+            <p>Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), Vertragserfüllung (lit. b), rechtliche Verpflichtung (lit. c), berechtigtes Interesse (lit. f). Cookie-Einwilligung zusätzlich nach § 25 Abs. 1 TDDDG.</p>
+            <h4>Widerruf</h4>
+            <p>Erteilte Einwilligungen können jederzeit widerrufen werden. Die Rechtmäßigkeit bisheriger Verarbeitung bleibt unberührt.</p>
+            <h4>Widerspruchsrecht (Art. 21 DSGVO)</h4>
+            <p><strong style="color:#fff">BEI VERARBEITUNG AUF GRUNDLAGE VON ART. 6 ABS. 1 LIT. E ODER F DSGVO HABEN SIE JEDERZEIT DAS RECHT, AUS GRÜNDEN IHRER BESONDEREN SITUATION WIDERSPRUCH EINZULEGEN.</strong></p>
+            <h4>Aufsichtsbehörde</h4>
+            <p>Sächsischer Datenschutzbeauftragter<br>Devrientstraße 5, 01067 Dresden<br>Tel: 0351 / 85471 101<br>E-Mail: saechsdsb@slt.sachsen.de</p>
+            <h4>SSL/TLS-Verschlüsselung</h4>
+            <p>Diese Seite nutzt SSL/TLS-Verschlüsselung. Erkennbar am „https://" und Schloss-Symbol im Browser.</p>
+
+            <h3>5. Datenerfassung auf dieser Website</h3>
+            <h4>Cookies</h4>
+            <p>Wir verwenden Cookies. Technisch notwendige Cookies werden auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO bzw. § 25 Abs. 2 TDDDG gespeichert. Sie können Ihren Browser so einstellen, dass er Cookies blockiert.</p>
+            <h4>Kontaktformular</h4>
+            <p>Ihre Angaben werden zwecks Bearbeitung gespeichert (Art. 6 Abs. 1 lit. b DSGVO). Daten verbleiben bei uns, bis Sie zur Löschung auffordern oder der Zweck entfällt. Gesetzliche Aufbewahrungsfristen bleiben unberührt.</p>
+            <h4>Anfrage per E-Mail/Telefon</h4>
+            <p>Ihre Anfrage inkl. aller Daten wird zur Bearbeitung gespeichert (Art. 6 Abs. 1 lit. b DSGVO). Wir geben Daten nicht ohne Einwilligung weiter.</p>
+
+            <h3>6. Plugins und Tools</h3>
+            <h4>Google Fonts (lokal)</h4>
+            <p>Diese Seite nutzt lokal installierte Google Fonts. Keine Verbindung zu Google-Servern.</p>
+            <h4>Font Awesome (lokal)</h4>
+            <p>Lokal eingebunden. Keine Verbindung zu externen Servern von Fonticons, Inc.</p>
+
+            <p style="color:#64748b;margin-top:3rem;font-size:.875rem;">Stand: Februar 2026</p>
+        </div>
+    </section>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+    <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)"><i class="fas fa-chevron-left"></i></button>
+    <button class="lightbox-nav lightbox-next" onclick="navLightbox(1)"><i class="fas fa-chevron-right"></i></button>
+    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-caption"><p class="font-bold text-lg" id="lightbox-title"></p><p class="text-gray-400 text-sm" id="lightbox-desc"></p></div>
+</div>
+
+<!-- FOOTER -->
+<footer class="pt-16 pb-8" style="background:linear-gradient(180deg,#0f172a,#1e293b)">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 pb-12 border-b border-gray-700">
+            <div>
+                <div class="flex items-center space-x-3 mb-5"><div class="w-10 h-10 rounded-lg accent-gradient flex items-center justify-center"><i class="fas fa-bolt text-gray-900 text-xl"></i></div><div><span class="text-xl font-bold text-white">Elektro</span><span class="text-xl font-bold text-yellow-500"> Müller</span></div></div>
+                <p class="text-gray-400 text-sm leading-relaxed">Ihr Meisterbetrieb für Elektrotechnik in Bautzen. Seit 2005.</p>
+            </div>
+            <div><h4 class="text-white font-semibold mb-5">Navigation</h4><ul class="space-y-3"><li><span onclick="navigateTo('home')" class="text-gray-400 hover:text-yellow-500 transition-colors text-sm cursor-pointer">Startseite</span></li><li><span onclick="navigateTo('leistungen')" class="text-gray-400 hover:text-yellow-500 transition-colors text-sm cursor-pointer">Leistungen</span></li><li><span onclick="navigateTo('ueber-uns')" class="text-gray-400 hover:text-yellow-500 transition-colors text-sm cursor-pointer">Über uns</span></li><li><span onclick="navigateTo('galerie')" class="text-gray-400 hover:text-yellow-500 transition-colors text-sm cursor-pointer">Galerie</span></li><li><span onclick="navigateTo('kontakt')" class="text-gray-400 hover:text-yellow-500 transition-colors text-sm cursor-pointer">Kontakt</span></li></ul></div>
+            <div><h4 class="text-white font-semibold mb-5">Leistungen</h4><ul class="space-y-3"><li><span onclick="navigateTo('leistungen')" class="text-gray-400 hover:text-yellow-500 transition-colors text-sm cursor-pointer">Elektroinstallation</span></li><li><span onclick="navigateTo('leistungen')" class="text-gray-400 hover:text-yellow-500 transition-colors text-sm cursor-pointer">Smart Home</span></li><li><span onclick="navigateTo('leistungen')" class="text-gray-400 hover:text-yellow-500 transition-colors text-sm cursor-pointer">Photovoltaik</span></li><li><span onclick="navigateTo('leistungen')" class="text-gray-400 hover:text-yellow-500 transition-colors text-sm cursor-pointer">E-Mobilität</span></li></ul></div>
+            <div><h4 class="text-white font-semibold mb-5">Kontakt</h4><ul class="space-y-3 text-sm text-gray-400"><li class="flex items-center space-x-3"><i class="fas fa-map-marker-alt text-yellow-500"></i><span>Reichenstraße 42, 02625 Bautzen</span></li><li class="flex items-center space-x-3"><i class="fas fa-phone-alt text-yellow-500"></i><span>03591 / 98 765 43</span></li><li class="flex items-center space-x-3"><i class="fas fa-envelope text-yellow-500"></i><span>info@elektro-mueller-bautzen.de</span></li></ul></div>
+        </div>
+        <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-500">
+            <p>© 2026 Elektro Müller Bautzen. Alle Rechte vorbehalten.</p>
+            <div class="flex space-x-6 mt-4 sm:mt-0"><span onclick="navigateTo('impressum')" class="hover:text-yellow-500 transition-colors cursor-pointer">Impressum</span><span onclick="navigateTo('datenschutz')" class="hover:text-yellow-500 transition-colors cursor-pointer">Datenschutz</span></div>
+        </div>
+    </div>
+</footer>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-banner" class="cookie-banner fixed bottom-0 left-0 right-0 z-50 p-4 sm:p-6">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-gray-300 text-sm"><i class="fas fa-cookie-bite text-yellow-500 mr-2"></i>Wir verwenden Cookies. <span onclick="navigateTo('datenschutz')" class="text-yellow-500 underline cursor-pointer">Mehr erfahren</span></p>
+        <div class="flex space-x-3 flex-shrink-0">
+            <button onclick="document.getElementById('cookie-banner').style.display='none'" class="text-gray-400 hover:text-white text-sm px-4 py-2 border border-gray-600 rounded-lg">Nur notwendige</button>
+            <button onclick="document.getElementById('cookie-banner').style.display='none'" class="btn-primary text-gray-900 font-semibold text-sm px-6 py-2 rounded-lg">Alle akzeptieren</button>
+        </div>
+    </div>
+</div>
+
+<!-- FLOATING -->
+<div class="floating-menu" id="floating-menu">
+    <div class="floating-menu-item"><span class="floating-menu-label">Anrufen</span><a href="tel:+4935919876543" class="floating-menu-btn bg-green-600 text-white"><i class="fas fa-phone-alt"></i></a></div>
+    <div class="floating-menu-item"><span class="floating-menu-label">E-Mail</span><a href="mailto:info@elektro-mueller-bautzen.de" class="floating-menu-btn bg-blue-600 text-white"><i class="fas fa-envelope"></i></a></div>
+    <div class="floating-menu-item"><span class="floating-menu-label">Kontaktformular</span><span onclick="navigateTo('kontakt');toggleFloatingMenu()" class="floating-menu-btn accent-gradient text-gray-900 cursor-pointer"><i class="fas fa-paper-plane"></i></span></div>
+</div>
+<div class="floating-contact" onclick="toggleFloatingMenu()"><i class="fas fa-comment-dots" id="floating-icon"></i></div>
+
+<!-- MOBILE BAR -->
+<div class="mobile-contact-bar">
+    <a href="tel:+4935919876543" class="flex-1 flex flex-col items-center justify-center py-3 text-gray-300 hover:text-yellow-500"><i class="fas fa-phone-alt text-lg mb-1"></i><span class="text-xs">Anrufen</span></a>
+    <a href="mailto:info@elektro-mueller-bautzen.de" class="flex-1 flex flex-col items-center justify-center py-3 text-gray-300 hover:text-yellow-500"><i class="fas fa-envelope text-lg mb-1"></i><span class="text-xs">E-Mail</span></a>
+    <span onclick="navigateTo('kontakt')" class="flex-1 flex flex-col items-center justify-center py-3 text-gray-900 accent-gradient font-medium cursor-pointer"><i class="fas fa-paper-plane text-lg mb-1"></i><span class="text-xs font-semibold">Anfrage</span></span>
+</div>
+
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-24 right-6 w-12 h-12 accent-gradient rounded-xl items-center justify-center text-gray-900 shadow-lg z-40 opacity-0 transition-opacity hidden md:flex" style="pointer-events:none"><i class="fas fa-arrow-up text-lg"></i></button>
+
+<script>
+// ===== FAST SPA ROUTER =====
+let currentPage = '';
+
+function navigateTo(page) {
+    if (page === currentPage) return; // skip if same page
+    window.location.hash = page;
+}
+
+function showPage(page) {
+    if (page === currentPage) return;
+
+    // Hide current
+    const cur = document.getElementById('page-' + currentPage);
+    if (cur) cur.classList.remove('active');
+
+    // Show new
+    const target = document.getElementById('page-' + page);
+    if (target) {
+        target.classList.add('active');
+        currentPage = page;
+    } else {
+        document.getElementById('page-home').classList.add('active');
+        currentPage = 'home';
+    }
+
+    // Nav links
+    document.querySelectorAll('.nav-link[data-page]').forEach(l => {
+        l.classList.toggle('active-link', l.dataset.page === currentPage);
+    });
+
+    // Title
+    const titles = {home:'Start',leistungen:'Leistungen','ueber-uns':'Über uns',galerie:'Galerie',bewertungen:'Bewertungen',faq:'FAQ',blog:'Blog',kontakt:'Kontakt',impressum:'Impressum',datenschutz:'Datenschutz'};
+    document.title = 'Elektro Müller – ' + (titles[currentPage] || 'Start');
+
+    // Instant scroll to top
+    window.scrollTo(0, 0);
+
+    // Animate ONLY elements on the new page
+    requestAnimationFrame(() => {
+        const pg = document.getElementById('page-' + currentPage);
+        if (!pg) return;
+        pg.querySelectorAll('.fade-up,.fade-left,.fade-right,.scale-in').forEach(el => {
+            el.classList.remove('visible');
+            observer.observe(el);
+        });
+        pg.querySelectorAll('.counter-value').forEach(el => {
+            if (!el.dataset.counted) counterObserver.observe(el);
+        });
+    });
+}
+
+window.addEventListener('hashchange', () => {
+    showPage(window.location.hash.replace('#','') || 'home');
+});
+
+// ===== FAST LOADER – 300ms =====
+window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        document.getElementById('loader').classList.add('hidden');
+        const page = window.location.hash.replace('#','') || 'home';
+        currentPage = ''; // reset so showPage runs
+        showPage(page);
+    }, 300);
+});
+
+// ===== PARTICLES (fewer = faster) =====
+(function(){
+    const c = document.getElementById('particles');
+    for(let i=0;i<8;i++){
+        const p=document.createElement('div');
+        p.classList.add('particle');
+        const s=Math.random()*3+2;
+        p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;bottom:-10px;animation-duration:${Math.random()*8+8}s;animation-delay:${Math.random()*10}s`;
+        c.appendChild(p);
+    }
+})();
+
+// ===== TYPEWRITER =====
+const twW=['Elektroniker','Smart Home Experte','PV-Spezialist','Meisterbetrieb'];
+let twI=0,twC=0,twD=false;
+function typewriter(){
+    const el=document.getElementById('typewriter');if(!el)return;
+    const w=twW[twI];
+    if(twD){el.textContent=w.substring(0,twC-1);twC--}
+    else{el.textContent=w.substring(0,twC+1);twC++}
+    let s=twD?30:60;
+    if(!twD&&twC===w.length){s=1800;twD=true}
+    else if(twD&&twC===0){twD=false;twI=(twI+1)%twW.length;s=300}
+    setTimeout(typewriter,s);
+}
+setTimeout(typewriter,800);
+
+// ===== MOBILE MENU =====
+function toggleMenu(){
+    document.getElementById('mobile-menu').classList.toggle('open');
+    const i=document.getElementById('menu-icon');
+    i.classList.toggle('fa-bars');i.classList.toggle('fa-times');
+}
+
+// ===== SCROLL =====
+window.addEventListener('scroll',()=>{
+    const st=window.scrollY;
+    const dh=document.documentElement.scrollHeight-window.innerHeight;
+    document.getElementById('scrollProgress').style.width=(dh>0?(st/dh)*100:0)+'%';
+    document.getElementById('navbar').classList.toggle('scrolled',st>50);
+    const b=document.getElementById('back-to-top');
+    if(st>500){b.style.opacity='1';b.style.pointerEvents='auto'}
+    else{b.style.opacity='0';b.style.pointerEvents='none'}
+},{passive:true});
+
+// ===== INTERSECTION OBSERVERS =====
+const observer=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+},{threshold:0.05,rootMargin:'0px 0px -30px 0px'});
+
+const counterObserver=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+        if(e.isIntersecting){
+            const el=e.target;
+            el.dataset.counted='1';
+            const t=parseInt(el.dataset.target);
+            const d=1200,step=t/(d/16);
+            let c=0;
+            const timer=setInterval(()=>{c+=step;if(c>=t){c=t;clearInterval(timer)}el.textContent=Math.floor(c).toLocaleString('de-DE')+'+'},16);
+            counterObserver.unobserve(el);
+        }
+    });
+},{threshold:0.5});
+
+// ===== FAQ =====
+function toggleFaq(item){
+    const a=item.classList.contains('active');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('active'));
+    if(!a)item.classList.add('active');
+}
+
+// ===== LIGHTBOX =====
+const gData=[
+    {src:'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1200&h=800&fit=crop',title:'Schaltschrankbau',desc:'Industrieanlage Bautzen-Nord'},
+    {src:'https://images.unsplash.com/photo-1558002038-1055907df827?w=1200&h=800&fit=crop',title:'Smart Home',desc:'Einfamilienhaus Bautzen'},
+    {src:'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200&h=800&fit=crop',title:'PV-Anlage 15 kWp',desc:'Wohnhaus Obergurig'},
+    {src:'https://images.unsplash.com/photo-1565608438257-fac3c27beb36?w=1200&h=800&fit=crop',title:'Wallbox Installation',desc:'Garage Bautzen-Süd'},
+    {src:'https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=1200&h=800&fit=crop',title:'LED-Konzept',desc:'Bürogebäude Bautzen'}
+];
+let cLb=0;
+function openLightbox(i){cLb=i;updLb();document.getElementById('lightbox').classList.add('active');document.body.style.overflow='hidden'}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('active');document.body.style.overflow=''}
+function navLightbox(d){cLb=(cLb+d+gData.length)%gData.length;updLb()}
+function updLb(){const d=gData[cLb];document.getElementById('lightbox-img').src=d.src;document.getElementById('lightbox-title').textContent=d.title;document.getElementById('lightbox-desc').textContent=d.desc}
+document.getElementById('lightbox').addEventListener('click',e=>{if(e.target===document.getElementById('lightbox'))closeLightbox()});
+document.addEventListener('keydown',e=>{if(!document.getElementById('lightbox').classList.contains('active'))return;if(e.key==='Escape')closeLightbox();if(e.key==='ArrowLeft')navLightbox(-1);if(e.key==='ArrowRight')navLightbox(1)});
+
+// ===== FLOATING =====
+let fOpen=false;
+function toggleFloatingMenu(){
+    fOpen=!fOpen;
+    document.getElementById('floating-menu').classList.toggle('active',fOpen);
+    document.getElementById('floating-icon').className=fOpen?'fas fa-times':'fas fa-comment-dots';
+}
+
+// ===== FORM =====
+function handleSubmit(e){
+    e.preventDefault();
+    const btn=document.getElementById('submit-btn');
+    btn.innerHTML='<i class="fas fa-spinner fa-spin mr-2"></i> Wird gesendet...';
+    btn.disabled=true;
+    setTimeout(()=>{
+        document.getElementById('success-msg').classList.remove('hidden');
+        document.getElementById('contact-form').reset();
+        btn.innerHTML='<i class="fas fa-paper-plane mr-2"></i> Nachricht senden';
+        btn.disabled=false;
+        setTimeout(()=>document.getElementById('success-msg').classList.add('hidden'),5000);
+    },800);
+}
+</script>
+</body>
+</html>

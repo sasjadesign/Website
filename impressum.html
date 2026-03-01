@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum | SasjaDesign Webdesign</title>
+
+    <!-- Dark Mode sofort anwenden -->
+    <script>
+        (function(){
+            var m=document.cookie.match(/(?:^|;\s*)theme=([^;]*)/);
+            var t=m?decodeURIComponent(m[1]):null;
+            if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ==================== PAGE LOADER ==================== -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">&lt;/&gt;</span>
+                <span class="logo-text">SasjaDesign<span class="logo-dot">.</span></span>
+            </a>
+            <div class="nav-actions">
+                <a href="index.html#contact" class="btn btn-primary nav-cta">Kontakt</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== IMPRESSUM ==================== -->
+    <section class="legal-page">
+        <div class="container" style="max-width: 800px;">
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Zurück zur Startseite
+            </a>
+
+            <h1>Impressum</h1>
+
+            <h2>Angaben gemäß § 5 TMG</h2>
+            <p>
+                Wasilij Sasjadiwko<br>
+                Deine Straße und Hausnummer<br>
+                PLZ Ort
+            </p>
+
+            <h2>Kontakt</h2>
+            <p>
+                Telefon: +49 151 2345 6789<br>
+                E-Mail: <a href="mailto:sasjadesign@gmail.com">sasjadesign@gmail.com</a>
+            </p>
+
+            <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+            <p>
+                Wasilij Sasjadiwko<br>
+                Deine Straße und Hausnummer<br>
+                PLZ Ort
+            </p>
+
+            <h2>Streitschlichtung</h2>
+            <p>
+                Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+                <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a>.
+            </p>
+            <p>
+                Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
+                Verbraucherschlichtungsstelle teilzunehmen.
+            </p>
+
+            <h2>Haftung für Inhalte</h2>
+            <p>
+                Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den
+                allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht
+                verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen
+                zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+            </p>
+
+            <h2>Haftung für Links</h2>
+            <p>
+                Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben.
+                Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der
+                verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
+            </p>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>
+                    <a href="datenschutz.html" style="color: #94a3b8; margin-right: 16px;">Datenschutz</a>
+                    <a href="#" class="reopen-cookie-settings" style="color: #94a3b8; margin-right: 16px;">Cookie-Einstellungen</a>
+                </p>
+                <p style="margin-top: 8px;">&copy; <span id="currentYear"></span> SasjaDesign. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== FIXED BUTTONS ==================== -->
+    <button id="theme-toggle" aria-label="Dark Mode umschalten">🌙</button>
+
+    <!-- ==================== COOKIE CONSENT BANNER ==================== -->
+    <div class="cookie-overlay" id="cookieOverlay">
+        <div class="cookie-modal" id="cookieBanner">
+            <div class="cookie-modal-header">
+                <div class="cookie-icon">🍪</div>
+                <div class="cookie-modal-header-text">
+                    <h3>Wir respektieren deine Privatsphäre</h3>
+                    <p>Diese Website verwendet Cookies, um dir die bestmögliche Erfahrung zu bieten. Notwendige Cookies sorgen dafür, dass die Website funktioniert. Optionale Cookies helfen uns, die Website zu verbessern.</p>
+                    <button class="cookie-details-toggle" id="cookieDetailsToggle">
+                        <span>Details anzeigen</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="cookie-details" id="cookieDetails">
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div class="cookie-category-info">
+                            <h4>Notwendige Cookies</h4>
+                            <p>Für Dark Mode, Cookie-Einstellungen und grundlegende Funktionen. Können nicht deaktiviert werden.</p>
+                        </div>
+                        <label class="cookie-switch disabled">
+                            <input type="checkbox" checked disabled>
+                            <span class="cookie-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div class="cookie-category-info">
+                            <h4>Analyse Cookies</h4>
+                            <p>Helfen uns zu verstehen, wie Besucher die Website nutzen (z.B. Google Analytics).</p>
+                        </div>
+                        <label class="cookie-switch">
+                            <input type="checkbox" id="cookieAnalytics">
+                            <span class="cookie-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div class="cookie-category-info">
+                            <h4>Externe Medien</h4>
+                            <p>Ermöglicht das Laden externer Inhalte wie Google Fonts, YouTube-Videos etc.</p>
+                        </div>
+                        <label class="cookie-switch">
+                            <input type="checkbox" id="cookieExternal">
+                            <span class="cookie-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cookie-actions">
+                <button class="cookie-btn cookie-btn-reject" id="cookieReject">Nur Notwendige</button>
+                <button class="cookie-btn cookie-btn-save" id="cookieSave" style="display:none;">Auswahl speichern</button>
+                <button class="cookie-btn cookie-btn-accept" id="cookieAccept">Alle akzeptieren</button>
+            </div>
+
+            <div class="cookie-footer-links">
+                <a href="datenschutz.html">Datenschutzerklärung</a>
+                <span>|</span>
+                <a href="impressum.html">Impressum</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
+
