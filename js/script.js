@@ -1,4 +1,30 @@
 /* ================================================
+   EARLY BOOTSTRAP (runs before DOMContentLoaded)
+   - Wartungsmodus prüfen
+   - Theme vorab setzen (verhindert Flash)
+   ================================================ */
+(function () {
+    // Wartungsmodus: wenn /maintenance.on existiert -> Wartungsseite anzeigen
+    try {
+        fetch('/maintenance.on', { cache: 'no-store' })
+            .then(function (res) {
+                if (res && res.ok) window.location.replace('/maintenance.html');
+            })
+            .catch(function () { /* normal laden */ });
+    } catch (e) { /* normal laden */ }
+
+    // Theme möglichst früh setzen
+    try {
+        var m = document.cookie.match(/(?:^|;\s*)theme=([^;]*)/);
+        var t = m ? decodeURIComponent(m[1]) : null;
+        if (t === 'dark' || (!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    } catch (e2) { /* ignore */ }
+})();
+
+
+/* ================================================
    COOKIE HELPER FUNCTIONS
    ================================================ */
 function setCookie(name, value, days) {
@@ -89,12 +115,16 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+   var mql = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+if (mql) {
+    var themeListener = function (e) {
         var saved = getCookie('theme');
-        if (!saved) {
-            applyTheme(e.matches ? 'dark' : 'light');
-        }
-    });
+        if (!saved) applyTheme(e.matches ? 'dark' : 'light');
+    };
+
+    if (mql.addEventListener) mql.addEventListener('change', themeListener);
+    else if (mql.addListener) mql.addListener(themeListener); // Fallback
+}
 
     // ==================== MOBILE NAVIGATION ====================
     var hamburger = document.getElementById('navHamburger');
@@ -166,6 +196,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // ==================== SCROLL ANIMATIONS ====================
     var animateElements = document.querySelectorAll('[data-animate]');
 
+    var animateElements = document.querySelectorAll('[data-animate]');
+
+if ('IntersectionObserver' in window) {
     var observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
             if (entry.isIntersecting) {
@@ -176,14 +209,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 observer.unobserve(entry.target);
             }
         });
-    }, {
-        threshold: 0.15,
-        rootMargin: '0px 0px -50px 0px'
-    });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
-    animateElements.forEach(function (el) {
-        observer.observe(el);
-    });
+    animateElements.forEach(function (el) { observer.observe(el); });
+} else {
+    // Fallback: einfach alles direkt anzeigen
+    animateElements.forEach(function (el) { el.classList.add('animated'); });
+}
+    
 
     // ==================== COUNTER ANIMATION ====================
     var counters = document.querySelectorAll('.stat-number[data-count]');
@@ -308,153 +341,188 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // ==================== COOKIE CONSENT ====================
-    var cookieOverlay = document.getElementById('cookieOverlay');
-    var cookieBanner = document.getElementById('cookieBanner');
-    var cookieAccept = document.getElementById('cookieAccept');
-    var cookieReject = document.getElementById('cookieReject');
-    var cookieSave = document.getElementById('cookieSave');
-    var cookieDetailsToggle = document.getElementById('cookieDetailsToggle');
-    var cookieDetails = document.getElementById('cookieDetails');
-    var cookieAnalytics = document.getElementById('cookieAnalytics');
-    var cookieExternal = document.getElementById('cookieExternal');
+ /* ==================== COOKIE CONSENT (Cookies + Dynamic Google Fonts) ==================== */
+(function () {
+  var overlay = document.getElementById('ccOverlay');
+  if (!overlay) return;
 
-    var consentValue = getCookie('cookie_consent');
+  var toggle = document.getElementById('ccToggle');
+  var details = document.getElementById('ccDetails');
 
-    function showCookieBanner() {
-        if (cookieOverlay && !consentValue) {
-            cookieOverlay.classList.add('visible');
-            body.style.overflow = 'hidden';
-        }
+  var btnAccept = document.getElementById('ccAccept');
+  var btnReject = document.getElementById('ccReject');
+  var btnSave = document.getElementById('ccSave');
+
+  var cbAnalytics = document.getElementById('ccAnalytics'); // bleibt ohne Funktion, falls du später willst
+  var cbExternal = document.getElementById('ccExternal');
+
+  // Footer-Link + alle Reopen-Links
+  var reopenSelectors = '.reopen-cookie-settings, .cc-reopen';
+
+  // Cookie-Name
+  var CONSENT_COOKIE = 'cookie_consent_v2';
+
+  function openBanner() {
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeBanner() {
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function getConsent() {
+    var raw = getCookie(CONSENT_COOKIE);
+    if (!raw) return null;
+    try { return JSON.parse(raw); } catch (e) { return null; }
+  }
+
+  function setConsent(obj) {
+    // 365 Tage
+    setCookie(CONSENT_COOKIE, JSON.stringify(obj), 365);
+    setCookie('cookie_consent_date', new Date().toISOString(), 365);
+  }
+
+  function syncUI(consent) {
+    if (cbAnalytics) cbAnalytics.checked = !!consent.analytics;
+    if (cbExternal) cbExternal.checked = !!consent.external;
+  }
+
+  function buildConsentFromUI() {
+    return {
+      necessary: true,
+      analytics: cbAnalytics ? !!cbAnalytics.checked : false, // aktuell unused
+      external: cbExternal ? !!cbExternal.checked : false,
+      ts: new Date().toISOString()
+    };
+  }
+
+  /* --------- Dynamic loaders --------- */
+  function loadGoogleFonts() {
+    // nur einmal laden
+    if (document.getElementById('gf-preconnect-1')) return;
+
+    var l1 = document.createElement('link');
+    l1.id = 'gf-preconnect-1';
+    l1.rel = 'preconnect';
+    l1.href = 'https://fonts.googleapis.com';
+
+    var l2 = document.createElement('link');
+    l2.id = 'gf-preconnect-2';
+    l2.rel = 'preconnect';
+    l2.href = 'https://fonts.gstatic.com';
+    l2.crossOrigin = 'anonymous';
+
+    var l3 = document.createElement('link');
+    l3.id = 'gf-stylesheet';
+    l3.rel = 'stylesheet';
+    l3.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap';
+
+    document.head.appendChild(l1);
+    document.head.appendChild(l2);
+    document.head.appendChild(l3);
+
+    // Optional: wenn Fonts geladen sind, CSS Variablen auf die echten Fonts setzen
+    // (nur falls du oben system-ui als fallback gesetzt hast)
+    document.documentElement.style.setProperty('--font-main', "'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif");
+    document.documentElement.style.setProperty('--font-heading', "'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif");
+  }
+
+  function applyConsent(consent) {
+    // Analytics: aktuell nichts zu laden (du nutzt kein GA)
+    // Externe Medien: hier laden wir Google Fonts (und später z.B. YouTube/Maps)
+    if (consent.external) {
+      loadGoogleFonts();
+      // loadExternalMedia(); // später möglich
     }
+  }
 
-    // Wenn schon Consent vorhanden, Einstellungen anwenden
-    if (consentValue) {
-        applyConsentSettings(consentValue);
-    }
+  /* --------- Details Toggle --------- */
+  if (toggle && details) {
+    toggle.addEventListener('click', function () {
+      var isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!isOpen));
+      details.hidden = isOpen;
 
-    // Banner nach Loader zeigen
-    window.addEventListener('load', function () {
-        setTimeout(showCookieBanner, 1200);
+      if (btnSave) btnSave.style.display = isOpen ? 'none' : 'inline-block';
     });
+  }
 
-    if (document.readyState === 'complete') {
-        setTimeout(showCookieBanner, 1200);
+  /* --------- Buttons --------- */
+  if (btnAccept) btnAccept.addEventListener('click', function () {
+    var c = { necessary: true, analytics: false, external: true, ts: new Date().toISOString() };
+    setConsent(c);
+    applyConsent(c);
+    closeBanner();
+  });
+
+  if (btnReject) btnReject.addEventListener('click', function () {
+    var c = { necessary: true, analytics: false, external: false, ts: new Date().toISOString() };
+    setConsent(c);
+    applyConsent(c);
+    closeBanner();
+  });
+
+  if (btnSave) btnSave.addEventListener('click', function () {
+    var c = buildConsentFromUI();
+    // Du nutzt kein Analytics, also erzwingen wir false (optional):
+    c.analytics = false;
+
+    setConsent(c);
+    applyConsent(c);
+    closeBanner();
+  });
+
+  /* --------- Reopen (Footer verbinden) --------- */
+  function reopenCookieSettings(e) {
+    e.preventDefault();
+    var c = getConsent() || { necessary: true, analytics: false, external: false };
+    syncUI(c);
+
+    // Details direkt öffnen
+    if (toggle && details) {
+      toggle.setAttribute('aria-expanded', 'true');
+      details.hidden = false;
+      if (btnSave) btnSave.style.display = 'inline-block';
     }
+    openBanner();
+  }
 
-    // Details Toggle
-    if (cookieDetailsToggle && cookieDetails) {
-        cookieDetailsToggle.addEventListener('click', function () {
-            var isOpen = cookieDetails.classList.toggle('open');
-            cookieDetailsToggle.classList.toggle('active');
-            cookieDetailsToggle.querySelector('span').textContent = isOpen ? 'Details ausblenden' : 'Details anzeigen';
+  document.querySelectorAll(reopenSelectors).forEach(function (el) {
+    el.addEventListener('click', reopenCookieSettings);
+  });
 
-            if (cookieSave) {
-                cookieSave.style.display = isOpen ? 'block' : 'none';
-            }
-        });
+  /* --------- UX: Klick außerhalb / ESC --------- */
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) {
+      // Nur schließen, wenn bereits Consent existiert
+      if (getConsent()) closeBanner();
     }
+  });
 
-    // Alle akzeptieren
-    if (cookieAccept) {
-        cookieAccept.addEventListener('click', function () {
-            saveConsent('all');
-            closeCookieBanner();
-        });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('is-open') && getConsent()) {
+      closeBanner();
     }
+  });
 
-    // Nur Notwendige
-    if (cookieReject) {
-        cookieReject.addEventListener('click', function () {
-            saveConsent('necessary');
-            closeCookieBanner();
-        });
-    }
+  /* --------- Initial --------- */
+  var existing = getConsent();
+  if (existing) {
+    syncUI(existing);
+    applyConsent(existing);
+  } else {
+    syncUI({ necessary: true, analytics: false, external: false });
+    openBanner();
+  }
 
-    // Auswahl speichern
-    if (cookieSave) {
-        cookieSave.addEventListener('click', function () {
-            var selected = 'necessary';
-            var parts = [];
-            if (cookieAnalytics && cookieAnalytics.checked) parts.push('analytics');
-            if (cookieExternal && cookieExternal.checked) parts.push('external');
-            if (parts.length > 0) {
-                selected = 'custom:' + parts.join(',');
-            }
-            saveConsent(selected);
-            closeCookieBanner();
-        });
-    }
-
-    function saveConsent(level) {
-        setCookie('cookie_consent', level, 365);
-        setCookie('cookie_consent_date', new Date().toISOString(), 365);
-        applyConsentSettings(level);
-    }
-
-    function closeCookieBanner() {
-        if (cookieOverlay) cookieOverlay.classList.remove('visible');
-        body.style.overflow = '';
-    }
-
-    function applyConsentSettings(consent) {
-        var allowAnalytics = false;
-        var allowExternal = false;
-
-        if (consent === 'all') {
-            allowAnalytics = true;
-            allowExternal = true;
-        } else if (consent.indexOf('custom:') === 0) {
-            var parts = consent.replace('custom:', '').split(',');
-            allowAnalytics = parts.indexOf('analytics') !== -1;
-            allowExternal = parts.indexOf('external') !== -1;
-        }
-
-        if (allowAnalytics) {
-            loadAnalytics();
-        }
-
-        if (allowExternal) {
-            loadExternalMedia();
-        }
-    }
-
-    function loadAnalytics() {
-        // Google Analytics hier einbinden:
-        // var script = document.createElement('script');
-        // script.src = 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX';
-        // script.async = true;
-        // document.head.appendChild(script);
-        // script.onload = function() {
-        //     window.dataLayer = window.dataLayer || [];
-        //     function gtag(){ dataLayer.push(arguments); }
-        //     gtag('js', new Date());
-        //     gtag('config', 'G-XXXXXXX');
-        // };
-    }
-
-    function loadExternalMedia() {
-        // Externe Dienste aktivieren (z.B. YouTube embeds etc.)
-    }
-
-    // Cookie-Einstellungen erneut öffnen
-    var reopenBtns = document.querySelectorAll('.reopen-cookie-settings');
-    reopenBtns.forEach(function (btn) {
-        btn.addEventListener('click', function (e) {
-            e.preventDefault();
-
-            // Checkboxen auf aktuellen Stand setzen
-            var currentConsent = getCookie('cookie_consent');
-            if (cookieAnalytics) {
-                cookieAnalytics.checked = (currentConsent === 'all' || (currentConsent && currentConsent.indexOf('analytics') !== -1));
-            }
-            if (cookieExternal) {
-                cookieExternal.checked = (currentConsent === 'all' || (currentConsent && currentConsent.indexOf('external') !== -1));
-            }
-
-            if (cookieOverlay) cookieOverlay.classList.add('visible');
-            body.style.overflow = 'hidden';
-        });
-    });
+  // Fail-safe: niemals dauerhaft sperren, falls Addons reinfunken
+  setTimeout(function () {
+    if (overlay.classList.contains('is-open') && getConsent()) closeBanner();
+  }, 8000);
+})();
 
 }); // Ende DOMContentLoaded

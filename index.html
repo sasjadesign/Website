@@ -1,46 +1,76 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-
-
-	<script>
-(async () => {
-  try {
-    // Wenn maintenance.on existiert -> Wartungsseite anzeigen
-    const res = await fetch('/maintenance.on', { cache: 'no-store' });
-    if (res.ok) window.location.replace('/maintenance.html');
-  } catch (e) {
-    // wenn fetch nicht klappt: normal laden
-  }
-})();
-</script>
-	
-	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%234F46E5'/><text x='50' y='68' text-anchor='middle' font-size='50' font-family='monospace' fill='white'>&lt;/&gt;</text></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%234F46E5'/><text x='50' y='68' text-anchor='middle' font-size='50' font-family='monospace' fill='white'>&lt;/&gt;</text></svg>">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SasjaDesign | Webdesign für lokale Unternehmen</title>
+    
+    <link rel="canonical" href="https://sasjadesign.de/" />
+
+    <meta property="og:title" content="SasjaDesign | Webdesign für lokale Unternehmen" />
+    <meta property="og:description" content="Moderne, schnelle und mobiloptimierte Websites, die echte Kunden bringen." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sasjadesign.de/" />
+    <meta property="og:image" content="https://sasjadesign.de/images/og.jpg" />
+    <meta property="og:site_name" content="SasjaDesign" />
+    <meta property="og:locale" content="de_DE" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SasjaDesign | Webdesign für lokale Unternehmen" />
+    <meta name="twitter:description" content="Moderne, schnelle und mobiloptimierte Websites, die echte Kunden bringen." />
+    <meta name="twitter:image" content="https://sasjadesign.de/images/og.jpg" />
     <meta name="description" content="Professionelles Webdesign für lokale Unternehmen. Moderne, schnelle und mobiloptimierte Websites, die echte Kunden bringen.">
 
-    <!-- Dark Mode sofort anwenden -->
-    <script>
-        (function(){
-            var m=document.cookie.match(/(?:^|;\s*)theme=([^;]*)/);
-            var t=m?decodeURIComponent(m[1]):null;
-            if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){
-                document.documentElement.classList.add('dark');
-            }
-        })();
-    </script>
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Wasilij Sasjadiwko",
+    "jobTitle": "Webdesigner",
+    "url": "https://sasjadesign.de/",
+    "email": "mailto:sasjadesign@gmail.com",
+    "knowsAbout": ["Webdesign", "SEO", "Performance-Optimierung", "DSGVO-konforme Websites"],
+    "areaServed": "DE"
+  }
+  </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <!-- Dark Mode sofort anwenden -->
+<link rel="stylesheet" href="css/style.css">
+
+    <script src="js/script.js" defer></script>
 </head>
 <body>
+    <!-- ==================== ICON SPRITE (LOCAL) ==================== -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+      <symbol id="icon-arrow-right" viewBox="0 0 24 24"><path d="M5 12h12"/><path d="M13 6l6 6-6 6"/></symbol>
+      <symbol id="icon-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></symbol>
+      <symbol id="icon-bolt" viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 12-14h-7l-1-6z"/></symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol>
+      <symbol id="icon-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16 8l-5.5 8L8 13.5"/></symbol>
+      <symbol id="icon-chevron-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+      <symbol id="icon-code" viewBox="0 0 24 24"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/><path d="M14 4l-4 16"/></symbol>
+      <symbol id="icon-comments" viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></symbol>
+      <symbol id="icon-envelope" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 6l8 7 8-7"/></symbol>
+      <symbol id="icon-external-link" viewBox="0 0 24 24"><path d="M14 3h7v7"/><path d="M10 14L21 3"/><path d="M21 14v7H3V3h7"/></symbol>
+      <symbol id="icon-headset" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 16 0v6a3 3 0 0 1-3 3h-1"/><path d="M4 18v-6"/><path d="M4 18a3 3 0 0 0 3 3h1"/><path d="M6 15h2"/><path d="M16 15h2"/></symbol>
+      <symbol id="icon-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+      <symbol id="icon-map-pin" viewBox="0 0 24 24"><path d="M12 21s7-4.4 7-11a7 7 0 0 0-14 0c0 6.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+      <symbol id="icon-smartphone" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></symbol>
+      <symbol id="icon-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0 0 18h2a3 3 0 0 0 0-6h-1a2 2 0 0 1 0-4h4a4 4 0 0 0 0-8z"/><circle cx="7.5" cy="10" r="1"/><circle cx="9.5" cy="6.5" r="1"/><circle cx="14.5" cy="6.5" r="1"/><circle cx="16.5" cy="10" r="1"/></symbol>
+      <symbol id="icon-send" viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></symbol>
+      <symbol id="icon-pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
+      <symbol id="icon-ruler" viewBox="0 0 24 24"><path d="M3 20l10-10 4 4L7 24z"/><path d="M14 3l7 7-11 11-7-7z"/><path d="M7 7l2 2"/><path d="M10 4l2 2"/><path d="M13 1l2 2"/></symbol>
+      <symbol id="icon-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 3 5.2 2 2 0 0 1 5 3h3a2 2 0 0 1 2 1.7c.1.8.3 1.6.6 2.3a2 2 0 0 1-.5 2.1L9.4 10.6a16 16 0 0 0 4 4l1.5-1.7a2 2 0 0 1 2.1-.5c.7.3 1.5.5 2.3.6A2 2 0 0 1 22 16.9z"/></symbol>
+      <symbol id="icon-rocket" viewBox="0 0 24 24"><path d="M5 13l-2 8 8-2 10-10a4.2 4.2 0 0 0-6-6L5 13z"/><path d="M15 5l4 4"/><path d="M9 19l-4-4"/></symbol>
+      <symbol id="icon-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol>
+      <symbol id="icon-star" viewBox="0 0 24 24"><path d="M12 2l3 7 7 .6-5.3 4.6 1.6 7.2L12 18l-6.3 3.4 1.6-7.2L2 9.6 9 9z"/></symbol>
+      <symbol id="icon-x" viewBox="0 0 24 24"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></symbol>
+    </svg>
+
+    <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
 
     <!-- ==================== PAGE LOADER ==================== -->
     <div class="page-loader" id="pageLoader">
@@ -61,7 +91,7 @@
                 <a href="#process" class="nav-link">Ablauf</a>
                 <a href="#pricing" class="nav-link">Preise</a>
                 <a href="#testimonials" class="nav-link">Referenzen</a>
-                <a href="#contact" class="nav-link">Kontakt</a>
+                
             </div>
             <div class="nav-actions">
                 <a href="#contact" class="btn btn-primary nav-cta">Kontakt</a>
@@ -74,7 +104,9 @@
         </div>
     </nav>
 
-    <!-- ==================== HERO ==================== -->
+    
+    <main id="main">
+<!-- ==================== HERO ==================== -->
     <section class="hero" id="hero">
         <div class="hero-bg-shapes">
             <div class="shape shape-1"></div>
@@ -95,7 +127,7 @@
                     schnellen und mobiloptimierten Websites, die echte Kunden bringen.
                 </p>
                 <div class="hero-cta">
-                    <a href="#contact" class="btn btn-primary btn-lg">Kostenlose Beratung <i class="fas fa-arrow-right"></i></a>
+                    <a href="#contact" class="btn btn-primary btn-lg">Kostenlose Beratung <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-right"></use></svg></a>
                     <a href="#portfolio" class="btn btn-outline btn-lg">Meine Arbeiten</a>
                 </div>
                 <div class="hero-stats">
@@ -124,8 +156,8 @@
                             <span class="dot green"></span>
                         </div>
                         <div class="browser-url">
-                            <i class="fas fa-lock"></i>
-                            www.dein-kunde.de
+                            <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-lock"></use></svg>
+                            www.Kunden-Domain.de
                         </div>
                     </div>
                     <div class="browser-body">
@@ -157,14 +189,14 @@
                     </div>
                 </div>
                 <div class="floating-card card-speed">
-                    <i class="fas fa-bolt"></i>
+                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-bolt"></use></svg>
                     <div>
                         <span class="fc-value">0.8s</span>
                         <span class="fc-label">Ladezeit</span>
                     </div>
                 </div>
                 <div class="floating-card card-mobile">
-                    <i class="fas fa-mobile-alt"></i>
+                    <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-smartphone"></use></svg>
                     <div>
                         <span class="fc-value">100%</span>
                         <span class="fc-label">Mobiloptimiert</span>
@@ -180,77 +212,118 @@
     </section>
 
     <!-- ==================== SERVICES ==================== -->
-    <section class="services section" id="services">
-        <div class="container">
-            <div class="section-header" data-animate>
-                <span class="section-tag">Leistungen</span>
-                <h2 class="section-title">Alles, was dein Unternehmen <span class="text-gradient">online braucht</span></h2>
-                <p class="section-subtitle">Von der ersten Idee bis zur fertigen Website – ich kümmere mich um alles, damit du dich auf dein Geschäft konzentrieren kannst.</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card" data-animate data-delay="0">
-                    <div class="service-icon"><i class="fas fa-palette"></i></div>
-                    <h3>Webdesign</h3>
-                    <p>Individuelles, modernes Design, das zu deiner Marke passt und Vertrauen bei deinen Kunden aufbaut.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Individuelles Design</li>
-                        <li><i class="fas fa-check"></i> Responsive Layout</li>
-                        <li><i class="fas fa-check"></i> Benutzerfreundlich</li>
-                    </ul>
-                </div>
-                <div class="service-card" data-animate data-delay="100">
-                    <div class="service-icon"><i class="fas fa-code"></i></div>
-                    <h3>Webentwicklung</h3>
-                    <p>Schnelle, sichere und saubere Programmierung mit den neuesten Technologien für beste Performance.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Schnelle Ladezeiten</li>
-                        <li><i class="fas fa-check"></i> Sauberer Code</li>
-                        <li><i class="fas fa-check"></i> SSL-Verschlüsselung</li>
-                    </ul>
-                </div>
-                <div class="service-card" data-animate data-delay="200">
-                    <div class="service-icon"><i class="fas fa-search"></i></div>
-                    <h3>SEO-Optimierung</h3>
-                    <p>Damit dein Unternehmen bei Google gefunden wird – lokale SEO-Optimierung inklusive.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Google My Business</li>
-                        <li><i class="fas fa-check"></i> Lokale Keywords</li>
-                        <li><i class="fas fa-check"></i> Meta-Optimierung</li>
-                    </ul>
-                </div>
-                <div class="service-card" data-animate data-delay="0">
-                    <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
-                    <h3>Mobile First</h3>
-                    <p>Über 70% der Besucher kommen über das Handy – deine Website sieht überall perfekt aus.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Touch-optimiert</li>
-                        <li><i class="fas fa-check"></i> Alle Bildschirmgrößen</li>
-                        <li><i class="fas fa-check"></i> Schnell mobil</li>
-                    </ul>
-                </div>
-                <div class="service-card" data-animate data-delay="100">
-                    <div class="service-icon"><i class="fas fa-pen-nib"></i></div>
-                    <h3>Content-Erstellung</h3>
-                    <p>Professionelle Texte und Bildauswahl, die deine Zielgruppe ansprechen und überzeugen.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> SEO-Texte</li>
-                        <li><i class="fas fa-check"></i> Bildoptimierung</li>
-                        <li><i class="fas fa-check"></i> Call-to-Actions</li>
-                    </ul>
-                </div>
-                <div class="service-card" data-animate data-delay="200">
-                    <div class="service-icon"><i class="fas fa-headset"></i></div>
-                    <h3>Wartung & Support</h3>
-                    <p>Nach dem Launch bin ich weiterhin für dich da – Updates, Änderungen und technischer Support.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Regelmäßige Updates</li>
-                        <li><i class="fas fa-check"></i> Backups</li>
-                        <li><i class="fas fa-check"></i> Schneller Support</li>
-                    </ul>
-                </div>
-            </div>
+<section class="services section" id="services">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <span class="section-tag">Leistungen</span>
+      <h2 class="section-title">
+        Alles, was dein Unternehmen <span class="text-gradient">online braucht</span>
+      </h2>
+      <p class="section-subtitle">
+        Von der Planung bis zum Launch: Ich erstelle moderne Websites, die professionell aussehen,
+        auf allen Geräten funktionieren und neue Anfragen erleichtern.
+      </p>
+    </div>
+
+    <div class="services-grid">
+      <!-- 1) Webdesign -->
+      <div class="service-card" data-animate data-delay="0">
+        <div class="service-icon">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-palette"></use></svg>
         </div>
-    </section>
+        <h3>Webdesign</h3>
+        <p>
+          Modernes Design, das zu deiner Marke passt – übersichtlich, vertrauenswürdig und auf Anfragen ausgelegt.
+        </p>
+        <ul class="service-features">
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg> Individuelles Layout</li>
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg> Klare Struktur & Navigation</li>
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg> Starke Call-to-Actions</li>
+        </ul>
+      </div>
+
+      <!-- 2) Entwicklung -->
+      <div class="service-card" data-animate data-delay="100">
+        <div class="service-icon">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-code"></use></svg>
+        </div>
+        <h3>Webentwicklung</h3>
+        <p>
+          Saubere Umsetzung mit moderner Technik – schnell, stabil und für alle Endgeräte optimiert.
+        </p>
+        <ul class="service-features">
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg> Responsive Umsetzung</li>
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg> Sauberer, wartbarer Code</li>
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg> Optimierte Ladezeiten</li>
+        </ul>
+      </div>
+
+      <!-- 3) SEO Basis + Local -->
+      <div class="service-card" data-animate data-delay="200">
+        <div class="service-icon">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-search"></use></svg>
+        </div>
+        <h3>SEO-Basis & Local SEO</h3>
+        <p>
+          Solide Grundlagen, damit Google deine Seite besser versteht – besonders wichtig für lokale Unternehmen.
+        </p>
+        <ul class="service-features">
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg> Titel, Meta & Struktur</li>
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg> Saubere Überschriften (H1–H3)</li>
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg> Lokale Inhalte (Region/Leistungen)</li>
+        </ul>
+      </div>
+
+      <!-- 4) Performance -->
+      <div class="service-card" data-animate data-delay="0">
+        <div class="service-icon">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-bolt"></use></svg>
+        </div>
+        <h3>Performance</h3>
+        <p>
+          Schnelle Ladezeiten sorgen für bessere Nutzererfahrung – und erhöhen die Chance auf mehr Anfragen.
+        </p>
+        <ul class="service-features">
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg> Bildoptimierung</li>
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg> Weniger unnötige Skripte</li>
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg> Saubere Darstellung ohne Layout-Sprünge</li>
+        </ul>
+      </div>
+
+      <!-- 5) Content & Struktur -->
+      <div class="service-card" data-animate data-delay="100">
+        <div class="service-icon">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-pen"></use></svg>
+        </div>
+        <h3>Content & Struktur</h3>
+        <p>
+          Ich helfe dir, Inhalte klar zu präsentieren – damit Besucher schnell verstehen, was du anbietest.
+        </p>
+        <ul class="service-features">
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg> Text- & Seitenstruktur</li>
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg> Leistungs-/Angebotsseiten</li>
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg> Optional: Textüberarbeitung</li>
+        </ul>
+      </div>
+
+      <!-- 6) Wartung & Support -->
+      <div class="service-card" data-animate data-delay="200">
+        <div class="service-icon">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-headset"></use></svg>
+        </div>
+        <h3>Wartung & Support</h3>
+        <p>
+          Auch nach dem Launch bin ich für dich da – Updates, kleine Änderungen und technischer Support nach Bedarf.
+        </p>
+        <ul class="service-features">
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg> Regelmäßige Updates (optional)</li>
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg> Kleine Änderungen</li>
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg> Schnelle Hilfe per E-Mail</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
     <!-- ==================== PORTFOLIO ==================== -->
     <section class="section" id="portfolio">
@@ -266,7 +339,7 @@
                         <div class="portfolio-image">
 				 <img src="images/Elektriker.png"
                  			alt="Elektroniker Website – Webdesign"
-                 				class="portfolio-preview">
+                 				class="portfolio-preview" width="1200" height="800" loading="lazy" decoding="async">
                             <div class="portfolio-placeholder">
                                 <div class="pp-browser">
                                     <div class="pp-dots"><span></span><span></span><span></span></div>
@@ -286,7 +359,7 @@
                                 </div>
                             </div>
                             <div class="portfolio-overlay">
-                                <a href="Demos/Elektroniker.html" class="portfolio-link">Website ansehen <i class="fas fa-external-link-alt"></i></a>
+                                <a href="Demos/Elektroniker.html" class="portfolio-link">Website ansehen <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-external-link"></use></svg></a>
                             </div>
                             <span class="portfolio-featured-badge">Featured</span>
                         </div>
@@ -306,7 +379,7 @@
                         <div class="portfolio-image">
 			 <img src="images/Handwerker.png"
                  			alt="Handwerker Website – Webdesign"
-                 				class="portfolio-preview">
+                 				class="portfolio-preview" width="1200" height="800" loading="lazy" decoding="async">
                             <div class="portfolio-placeholder color-2">
                                 <div class="pp-browser">
                                     <div class="pp-dots"><span></span><span></span><span></span></div>
@@ -326,7 +399,7 @@
                                 </div>
                             </div>
                             <div class="portfolio-overlay">
-                                <a href="Demos/Handwerker.html" class="portfolio-link">Website ansehen <i class="fas fa-external-link-alt"></i></a>
+                                <a href="Demos/Handwerker.html" class="portfolio-link">Website ansehen <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-external-link"></use></svg></a>
                             </div>
                         </div>
                         <div class="portfolio-info">
@@ -344,7 +417,7 @@
                         <div class="portfolio-image">
 			 <img src="images/Friseur.png"
                  			alt="Friseur Website – Webdesign"
-                 				class="portfolio-preview">
+                 				class="portfolio-preview" width="1200" height="800" loading="lazy" decoding="async">
 							<div class="portfolio-placeholder color-3">
                                 <div class="pp-browser">
                                     <div class="pp-dots"><span></span><span></span><span></span></div>
@@ -364,7 +437,7 @@
                                 </div>
                             </div>
                             <div class="portfolio-overlay">
-                                <a href="Demos/Friseur.html" class="portfolio-link">Website ansehen <i class="fas fa-external-link-alt"></i></a>
+                                <a href="Demos/Friseur.html" class="portfolio-link">Website ansehen <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-external-link"></use></svg></a>
                             </div>
                         </div>
                         <div class="portfolio-info">
@@ -394,7 +467,7 @@
                 <div class="process-step" data-animate data-delay="0">
                     <div class="step-number">01</div>
                     <div class="step-content">
-                        <div class="step-icon"><i class="fas fa-comments"></i></div>
+                        <div class="step-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-comments"></use></svg></div>
                         <h3>Kostenloses Erstgespräch</h3>
                         <p>Wir besprechen deine Wünsche, Ziele und Anforderungen. Ich berate dich ehrlich und unverbindlich.</p>
                     </div>
@@ -402,7 +475,7 @@
                 <div class="process-step" data-animate data-delay="100">
                     <div class="step-number">02</div>
                     <div class="step-content">
-                        <div class="step-icon"><i class="fas fa-pencil-ruler"></i></div>
+                        <div class="step-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-ruler"></use></svg></div>
                         <h3>Konzept & Design</h3>
                         <p>Ich erstelle ein maßgeschneidertes Design-Konzept. Du bekommst einen Entwurf zur Abstimmung.</p>
                     </div>
@@ -410,7 +483,7 @@
                 <div class="process-step" data-animate data-delay="200">
                     <div class="step-number">03</div>
                     <div class="step-content">
-                        <div class="step-icon"><i class="fas fa-code"></i></div>
+                        <div class="step-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-code"></use></svg></div>
                         <h3>Entwicklung</h3>
                         <p>Deine Website wird programmiert – schnell, responsive und SEO-optimiert. Regelmäßige Updates zum Fortschritt.</p>
                     </div>
@@ -418,7 +491,7 @@
                 <div class="process-step" data-animate data-delay="300">
                     <div class="step-number">04</div>
                     <div class="step-content">
-                        <div class="step-icon"><i class="fas fa-rocket"></i></div>
+                        <div class="step-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-rocket"></use></svg></div>
                         <h3>Launch & Support</h3>
                         <p>Deine Website geht live! Danach biete ich fortlaufende Wartung und Support für dich an.</p>
                     </div>
@@ -427,82 +500,98 @@
         </div>
     </section>
 
-    <!-- ==================== PRICING ==================== -->
-    <section class="section" id="pricing">
-        <div class="container">
-            <div class="section-header" data-animate>
-                <span class="section-tag">Preise</span>
-                <h2 class="section-title">Transparente <span class="text-gradient">Festpreise</span></h2>
-                <p class="section-subtitle">Keine versteckten Kosten. Du weißt vorher genau, was du bekommst und was es kostet.</p>
-            </div>
-            <div class="pricing-grid">
-                <div class="pricing-card" data-animate data-delay="0">
-                    <div class="pricing-header">
-                        <h3>Starter</h3>
-                        <p class="pricing-desc">Perfekt für den Einstieg</p>
-                        <div class="pricing-price">
-                            <span class="price-currency">€</span>
-                            <span class="price-amount">499</span>
-                        </div>
-                        <span class="price-note">einmalig</span>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> One-Page Website</li>
-                        <li><i class="fas fa-check"></i> Responsive Design</li>
-                        <li><i class="fas fa-check"></i> Kontaktformular</li>
-                        <li><i class="fas fa-check"></i> SEO Grundoptimierung</li>
-                        <li><i class="fas fa-check"></i> Google Maps</li>
-                        <li class="disabled"><i class="fas fa-times"></i> Mehrere Unterseiten</li>
-                        <li class="disabled"><i class="fas fa-times"></i> Blog-Funktion</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-outline btn-block">Jetzt anfragen</a>
-                </div>
-                <div class="pricing-card popular" data-animate data-delay="100">
-                    <span class="popular-badge">Beliebt</span>
-                    <div class="pricing-header">
-                        <h3>Business</h3>
-                        <p class="pricing-desc">Für wachsende Unternehmen</p>
-                        <div class="pricing-price">
-                            <span class="price-currency">€</span>
-                            <span class="price-amount">999</span>
-                        </div>
-                        <span class="price-note">einmalig</span>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Bis zu 5 Unterseiten</li>
-                        <li><i class="fas fa-check"></i> Premium Design</li>
-                        <li><i class="fas fa-check"></i> Kontaktformular</li>
-                        <li><i class="fas fa-check"></i> SEO-Optimierung</li>
-                        <li><i class="fas fa-check"></i> Google Maps</li>
-                        <li><i class="fas fa-check"></i> Social Media Integration</li>
-                        <li><i class="fas fa-check"></i> 3 Monate Support</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-primary btn-block">Jetzt anfragen</a>
-                </div>
-                <div class="pricing-card" data-animate data-delay="200">
-                    <div class="pricing-header">
-                        <h3>Premium</h3>
-                        <p class="pricing-desc">Das Komplettpaket</p>
-                        <div class="pricing-price">
-                            <span class="price-currency">€</span>
-                            <span class="price-amount">1.999</span>
-                        </div>
-                        <span class="price-note">einmalig</span>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Unbegrenzte Seiten</li>
-                        <li><i class="fas fa-check"></i> Exklusives Design</li>
-                        <li><i class="fas fa-check"></i> CMS / Blog</li>
-                        <li><i class="fas fa-check"></i> Erweiterte SEO</li>
-                        <li><i class="fas fa-check"></i> Terminbuchung</li>
-                        <li><i class="fas fa-check"></i> Analytics Dashboard</li>
-                        <li><i class="fas fa-check"></i> 6 Monate Support</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-outline btn-block">Jetzt anfragen</a>
-                </div>
-            </div>
+   <!-- ==================== PRICING ==================== -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <span class="section-tag">Preise</span>
+      <h2 class="section-title">Transparente <span class="text-gradient">Festpreise</span></h2>
+      <p class="section-subtitle">
+        Klare Leistungen, keine versteckten Kosten. Hosting und Domain sind nicht enthalten.
+      </p>
+    </div>
+
+    <div class="pricing-grid">
+
+      <!-- STARTER -->
+      <div class="pricing-card" data-animate data-delay="0">
+        <div class="pricing-header">
+          <h3>Starter</h3>
+          <p class="pricing-desc">Perfekt für den Einstieg</p>
+          <div class="pricing-price">
+            <span class="price-currency">€</span>
+            <span class="price-amount">499</span>
+          </div>
+          <span class="price-note">einmalig</span>
         </div>
-    </section>
+
+        <ul class="pricing-features">
+          <li><svg class="icon"><use href="#icon-check"></use></svg> One-Page Website</li>
+          <li><svg class="icon"><use href="#icon-check"></use></svg> Individuelles Design</li>
+          <li><svg class="icon"><use href="#icon-check"></use></svg> Responsive Umsetzung</li>
+          <li><svg class="icon"><use href="#icon-check"></use></svg> Kontaktformular</li>
+          <li><svg class="icon"><use href="#icon-check"></use></svg> SEO-Basis (Titel & Struktur)</li>
+          <li class="disabled"><svg class="icon"><use href="#icon-x"></use></svg> Mehrere Unterseiten</li>
+          <li class="disabled"><svg class="icon"><use href="#icon-x"></use></svg> CMS / Blog</li>
+        </ul>
+
+        <a href="#contact" class="btn btn-outline btn-block">Jetzt anfragen</a>
+      </div>
+
+      <!-- BUSINESS -->
+      <div class="pricing-card popular" data-animate data-delay="100">
+        <span class="popular-badge">Beliebt</span>
+        <div class="pricing-header">
+          <h3>Business</h3>
+          <p class="pricing-desc">Für wachsende Unternehmen</p>
+          <div class="pricing-price">
+            <span class="price-currency">€</span>
+            <span class="price-amount">999</span>
+          </div>
+          <span class="price-note">einmalig</span>
+        </div>
+
+        <ul class="pricing-features">
+          <li><svg class="icon"><use href="#icon-check"></use></svg> Bis zu 5 Unterseiten</li>
+          <li><svg class="icon"><use href="#icon-check"></use></svg> Premium Design</li>
+          <li><svg class="icon"><use href="#icon-check"></use></svg> Kontaktformular</li>
+          <li><svg class="icon"><use href="#icon-check"></use></svg> SEO-Basis & Local SEO</li>
+          <li><svg class="icon"><use href="#icon-check"></use></svg> Performance-Optimierung</li>
+          <li><svg class="icon"><use href="#icon-check"></use></svg> Social Media Verlinkung</li>
+          <li><svg class="icon"><use href="#icon-check"></use></svg> 1 Monat Support</li>
+        </ul>
+
+        <a href="#contact" class="btn btn-primary btn-block">Jetzt anfragen</a>
+      </div>
+
+      <!-- PREMIUM -->
+      <div class="pricing-card" data-animate data-delay="200">
+        <div class="pricing-header">
+          <h3>Premium</h3>
+          <p class="pricing-desc">Für größere Projekte</p>
+          <div class="pricing-price">
+            <span class="price-currency">€</span>
+            <span class="price-amount">1.999</span>
+          </div>
+          <span class="price-note">einmalig</span>
+        </div>
+
+        <ul class="pricing-features">
+          <li><svg class="icon"><use href="#icon-check"></use></svg> Individueller Seitenumfang</li>
+          <li><svg class="icon"><use href="#icon-check"></use></svg> Exklusives Design</li>
+          <li><svg class="icon"><use href="#icon-check"></use></svg> CMS / einfache Inhaltsbearbeitung</li>
+          <li><svg class="icon"><use href="#icon-check"></use></svg> Erweiterte SEO-Basis</li>
+          <li><svg class="icon"><use href="#icon-check"></use></svg> Performance-Optimierung</li>
+          <li><svg class="icon"><use href="#icon-check"></use></svg> Terminbuchung / Formulare</li>
+          <li><svg class="icon"><use href="#icon-check"></use></svg> 3 Monate Support</li>
+        </ul>
+
+        <a href="#contact" class="btn btn-outline btn-block">Jetzt anfragen</a>
+      </div>
+
+    </div>
+  </div>
+</section>
 
     <!-- ==================== TESTIMONIALS ==================== -->
     <section class="testimonials section" id="testimonials">
@@ -514,7 +603,7 @@
             <div class="testimonials-grid">
                 <div class="testimonial-card" data-animate data-delay="0">
                     <div class="testimonial-stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-star"></use></svg><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-star"></use></svg><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-star"></use></svg><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-star"></use></svg><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-star"></use></svg>
                     </div>
                     <p class="testimonial-text">"Unsere neue Website hat unsere Anfragen verdreifacht! Die Zusammenarbeit war super professionell und unkompliziert."</p>
                     <div class="testimonial-author">
@@ -527,7 +616,7 @@
                 </div>
                 <div class="testimonial-card" data-animate data-delay="100">
                     <div class="testimonial-stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-star"></use></svg><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-star"></use></svg><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-star"></use></svg><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-star"></use></svg><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-star"></use></svg>
                     </div>
                     <p class="testimonial-text">"Endlich eine Website, die auch auf dem Handy toll aussieht! Unsere Kunden buchen jetzt direkt online Termine."</p>
                     <div class="testimonial-author">
@@ -540,7 +629,7 @@
                 </div>
                 <div class="testimonial-card" data-animate data-delay="200">
                     <div class="testimonial-stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-star"></use></svg><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-star"></use></svg><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-star"></use></svg><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-star"></use></svg><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-star"></use></svg>
                     </div>
                     <p class="testimonial-text">"Von der Beratung bis zum Go-Live alles top. Wir werden jetzt bei Google gefunden und haben 40% mehr Laufkundschaft."</p>
                     <div class="testimonial-author">
@@ -566,7 +655,7 @@
                 <div class="faq-item" data-animate>
                     <button class="faq-question">
                         Wie lange dauert es, bis meine Website fertig ist?
-                        <i class="fas fa-chevron-down"></i>
+                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-chevron-down"></use></svg>
                     </button>
                     <div class="faq-answer">
                         <p>In der Regel dauert es 1–3 Wochen, je nach Umfang des Projekts. Eine einfache One-Page Website kann oft schon in einer Woche fertig sein.</p>
@@ -575,7 +664,7 @@
                 <div class="faq-item" data-animate>
                     <button class="faq-question">
                         Muss ich selbst Texte und Bilder liefern?
-                        <i class="fas fa-chevron-down"></i>
+                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-chevron-down"></use></svg>
                     </button>
                     <div class="faq-answer">
                         <p>Nicht unbedingt! Ich kann die Texterstellung und Bildauswahl für dich übernehmen. Natürlich sind eigene Fotos und Informationen immer ein Plus.</p>
@@ -584,7 +673,7 @@
                 <div class="faq-item" data-animate>
                     <button class="faq-question">
                         Was kostet die monatliche Wartung?
-                        <i class="fas fa-chevron-down"></i>
+                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-chevron-down"></use></svg>
                     </button>
                     <div class="faq-answer">
                         <p>Kleine Änderungen und Updates sind oft im Support-Zeitraum inbegriffen. Darüber hinaus biete ich Wartungspakete ab 29€/Monat an.</p>
@@ -593,7 +682,7 @@
                 <div class="faq-item" data-animate>
                     <button class="faq-question">
                         Kann ich die Website später selbst bearbeiten?
-                        <i class="fas fa-chevron-down"></i>
+                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-chevron-down"></use></svg>
                     </button>
                     <div class="faq-answer">
                         <p>Ja! Ab dem Business-Paket gibt es die Möglichkeit, ein einfaches CMS einzubauen, mit dem du Texte, Bilder und mehr selbst ändern kannst.</p>
@@ -602,7 +691,7 @@
                 <div class="faq-item" data-animate>
                     <button class="faq-question">
                         Kommen noch Kosten für Hosting und Domain dazu?
-                        <i class="fas fa-chevron-down"></i>
+                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-chevron-down"></use></svg>
                     </button>
                     <div class="faq-answer">
                         <p>Die Domain kostet ca. 10–15€ pro Jahr, das Hosting ca. 5–10€ pro Monat. Ich berate dich gerne zu den besten Optionen für dein Budget.</p>
@@ -622,21 +711,21 @@
                     <p>Du hast eine Idee oder Fragen? Schreib mir einfach – ich melde mich innerhalb von 24 Stunden bei dir.</p>
                     <div class="contact-details">
                         <div class="contact-item">
-                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                            <div class="contact-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-envelope"></use></svg></div>
                             <div>
                                 <span class="contact-label">E-Mail</span>
                                 <a href="mailto:sasjadesign@gmail.com">sasjadesign@gmail.com</a>
                             </div>
                         </div>
                         <div class="contact-item">
-                            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                            <div class="contact-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-phone"></use></svg></div>
                             <div>
                                 <span class="contact-label">Telefon</span>
                                 <a href="tel:+4915123456789">+49 151 2345 6789</a>
                             </div>
                         </div>
                         <div class="contact-item">
-                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="contact-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-map-pin"></use></svg></div>
                             <div>
                                 <span class="contact-label">Standort</span>
                                 <span>Deine Stadt, Deutschland</span>
@@ -672,10 +761,10 @@
                             <label for="message">Nachricht *</label>
                             <textarea id="message" name="message" rows="5" required placeholder="Erzähl mir von deinem Projekt..."></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-lg">Nachricht senden <i class="fas fa-paper-plane"></i></button>
+                        <button type="submit" class="btn btn-primary btn-lg">Nachricht senden <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-send"></use></svg></button>
                     </form>
                     <div class="form-success" id="formSuccess" style="display: none;">
-                        <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="success-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-check-circle"></use></svg></div>
                         <h3>Nachricht gesendet!</h3>
                         <p>Vielen Dank für deine Anfrage. Ich melde mich innerhalb von 24 Stunden bei dir.</p>
                     </div>
@@ -690,12 +779,14 @@
             <div class="cta-box" data-animate>
                 <h2>Bereit für deine neue Website?</h2>
                 <p>Starte jetzt mit einem kostenlosen Beratungsgespräch – unverbindlich und ohne Risiko.</p>
-                <a href="#contact" class="btn btn-white btn-lg">Jetzt starten <i class="fas fa-arrow-right"></i></a>
+                <a href="#contact" class="btn btn-white btn-lg">Jetzt starten <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-right"></use></svg></a>
             </div>
         </div>
     </section>
 
     <!-- ==================== FOOTER ==================== -->
+    </main>
+
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -704,24 +795,16 @@
                         <span class="logo-icon">&lt;/&gt;</span>
                         <span class="logo-text">SasjaDesign<span class="logo-dot">.</span></span>
                     </a>
-                    <p>Professionelles Webdesign für lokale Unternehmen. Damit du online gefunden wirst.</p>
+                    <p>Professionelles Webdesign für lokale Unternehmen.<br> Damit du online gefunden wirst.</p>
                 </div>
-                <div class="footer-links-col">
-                    <h4>Navigation</h4>
-                    <ul>
-                        <li><a href="#services">Leistungen</a></li>
-                        <li><a href="#portfolio">Portfolio</a></li>
-                        <li><a href="#process">Ablauf</a></li>
-                        <li><a href="#pricing">Preise</a></li>
-                    </ul>
-                </div>
+                
                 <div class="footer-links-col">
                     <h4>Kontakt</h4>
                     <ul>
                         <li><a href="mailto:sasjadesign@gmail.com">sasjadesign@gmail.com</a></li>
-                       <a><span>+49 151 2345 6789</span></a>
+                       <li><a href="tel:+4915123456789">+49 151 5416 8773</a></li>
                        
-                        <li><span>Deine Stadt, DE</span></li>
+                        <li><span>Oppach, DE</span></li>
                     </ul>
                 </div>
               <div class="footer-links-col">
@@ -729,9 +812,11 @@
     <ul>
         <li><a href="impressum.html">Impressum</a></li>
         <li><a href="datenschutz.html">Datenschutz</a></li>
+        <li><a href="agb.html">AGB</a></li>
         <li><a href="#" class="reopen-cookie-settings">Cookie-Einstellungen</a></li>
     </ul>
 </div>
+        </div>
             <div class="footer-bottom">
                 <p>&copy; <span id="currentYear"></span> SasjaDesign. Alle Rechte vorbehalten.</p>
             </div>
@@ -740,103 +825,80 @@
 
     <!-- ==================== FIXED BUTTONS ==================== -->
     <button class="back-to-top" id="backToTop" aria-label="Nach oben scrollen">
-        <i class="fas fa-arrow-up"></i>
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-arrow-up"></use></svg>
     </button>
 
 
     <button id="theme-toggle" aria-label="Dark Mode umschalten">🌙</button>
 
-    <!-- ==================== COOKIE CONSENT BANNER ==================== -->
-    <div class="cookie-overlay" id="cookieOverlay">
-        <div class="cookie-modal" id="cookieBanner">
-            <div class="cookie-modal-header">
-                <div class="cookie-icon">🍪</div>
-                <div class="cookie-modal-header-text">
-                    <h3>Wir respektieren deine Privatsphäre</h3>
-                    <p>Diese Website verwendet Cookies, um dir die bestmögliche Erfahrung zu bieten. Notwendige Cookies sorgen dafür, dass die Website funktioniert. Optionale Cookies helfen uns, die Website zu verbessern.</p>
-                    <button class="cookie-details-toggle" id="cookieDetailsToggle">
-                        <span>Details anzeigen</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="cookie-details" id="cookieDetails">
-                <div class="cookie-category">
-                    <div class="cookie-category-header">
-                        <div class="cookie-category-info">
-                            <h4>Notwendige Cookies</h4>
-                            <p>Für Dark Mode, Cookie-Einstellungen und grundlegende Funktionen. Können nicht deaktiviert werden.</p>
-                        </div>
-                        <label class="cookie-switch disabled">
-                            <input type="checkbox" checked disabled>
-                            <span class="cookie-slider"></span>
-                        </label>
-                    </div>
-                </div>
-                <div class="cookie-category">
-                    <div class="cookie-category-header">
-                        <div class="cookie-category-info">
-                            <h4>Analyse Cookies</h4>
-                            <p>Helfen uns zu verstehen, wie Besucher die Website nutzen (z.B. Google Analytics).</p>
-                        </div>
-                        <label class="cookie-switch">
-                            <input type="checkbox" id="cookieAnalytics">
-                            <span class="cookie-slider"></span>
-                        </label>
-                    </div>
-                </div>
-                <div class="cookie-category">
-                    <div class="cookie-category-header">
-                        <div class="cookie-category-info">
-                            <h4>Externe Medien</h4>
-                            <p>Ermöglicht das Laden externer Inhalte wie Google Fonts, YouTube-Videos etc.</p>
-                        </div>
-                        <label class="cookie-switch">
-                            <input type="checkbox" id="cookieExternal">
-                            <span class="cookie-slider"></span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="cookie-actions">
-                <button class="cookie-btn cookie-btn-reject" id="cookieReject">Nur Notwendige</button>
-                <button class="cookie-btn cookie-btn-save" id="cookieSave" style="display:none;">Auswahl speichern</button>
-                <button class="cookie-btn cookie-btn-accept" id="cookieAccept">Alle akzeptieren</button>
-            </div>
-
-            <div class="cookie-footer-links">
-                <a href="datenschutz.html">Datenschutzerklärung</a>
-                <span>|</span>
-                <a href="impressum.html">Impressum</a>
-            </div>
-        </div>
+    <!-- Cookie Consent -->
+<div class="cc-overlay" id="ccOverlay" aria-hidden="true">
+  <div class="cc-modal" role="dialog" aria-modal="true" aria-labelledby="ccTitle" aria-describedby="ccDesc">
+    <div class="cc-header">
+      <div class="cc-icon" aria-hidden="true">🍪</div>
+      <div>
+        <h3 id="ccTitle">Wir respektieren deine Privatsphäre</h3>
+        <p id="ccDesc">
+          Wir nutzen notwendige Cookies für grundlegende Funktionen. Optionale Cookies helfen uns, die Website zu verbessern
+          (z.B. Analytics) und externe Inhalte zu laden.
+        </p>
+      </div>
     </div>
 
+    <button class="cc-toggle" id="ccToggle" type="button" aria-expanded="false" aria-controls="ccDetails">
+      <span>Einstellungen</span>
+      <span class="cc-chevron" aria-hidden="true">▾</span>
+    </button>
 
+    <div class="cc-details" id="ccDetails" hidden>
+      <div class="cc-row">
+        <div class="cc-row-text">
+          <h4>Notwendige Cookies</h4>
+          <p>Erforderlich für Grundfunktionen (z.B. Dark Mode, Cookie-Auswahl).</p>
+        </div>
+        <label class="cc-switch cc-switch--disabled" title="Kann nicht deaktiviert werden">
+          <input type="checkbox" checked disabled />
+          <span class="cc-slider"></span>
+        </label>
+      </div>
 
-    <script src="js/script.js"></script>
+      <div class="cc-row">
+        <div class="cc-row-text">
+          <h4>Analytics</h4>
+          <p>Hilft uns zu verstehen, wie die Website genutzt wird.</p>
+        </div>
+        <label class="cc-switch">
+          <input id="ccAnalytics" type="checkbox" />
+          <span class="cc-slider"></span>
+        </label>
+      </div>
+
+      <div class="cc-row">
+        <div class="cc-row-text">
+          <h4>Externe Medien</h4>
+          <p>Erlaubt externe Inhalte (z.B. YouTube, Google Maps, Fonts).</p>
+        </div>
+        <label class="cc-switch">
+          <input id="ccExternal" type="checkbox" />
+          <span class="cc-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="cc-actions">
+      <button class="cc-btn cc-btn--ghost" id="ccReject" type="button">Nur notwendige</button>
+      <button class="cc-btn cc-btn--ghost" id="ccSave" type="button" style="display:none;">Auswahl speichern</button>
+      <button class="cc-btn cc-btn--primary" id="ccAccept" type="button">Alle akzeptieren</button>
+    </div>
+
+    <div class="cc-links">
+      <a href="datenschutz.html">Datenschutz</a>
+      <span aria-hidden="true">•</span>
+      <a href="impressum.html">Impressum</a>
+      <span aria-hidden="true">•</span>
+      <a href="#" class="cc-reopen" id="ccReopen">Cookie-Einstellungengen</a>
+    </div>
+  </div>
+</div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

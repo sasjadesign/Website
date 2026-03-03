@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGB | SasjaDesign Webdesign</title>
+
+    <script>
+        (function(){
+            var m=document.cookie.match(/(?:^|;\s*)theme=([^;]*)/);
+            var t=m?decodeURIComponent(m[1]):null;
+            if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="page-loader" id="pageLoader">
+    <div class="loader-spinner"></div>
+</div>
+
+<nav class="navbar" id="navbar">
+    <div class="container nav-container">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">&lt;/&gt;</span>
+            <span class="logo-text">SasjaDesign<span class="logo-dot">.</span></span>
+        </a>
+        <div class="nav-actions">
+            <a href="index.html#contact" class="btn btn-primary nav-cta">Kontakt</a>
+        </div>
+    </div>
+</nav>
+
+<section class="legal-page">
+<div class="container" style="max-width: 800px;">
+
+<a href="index.html" class="back-link">
+    ← Zurück zur Startseite
+</a>
+
+<h1>Allgemeine Geschäftsbedingungen (B2B)</h1>
+<p><strong>SasjaDesign – Webdesign & digitale Dienstleistungen</strong><br>
+Stand: März 2026</p>
+
+<h2>§1 Geltungsbereich</h2>
+<p>Diese AGB gelten ausschließlich gegenüber Unternehmern im Sinne von §14 BGB.</p>
+
+<h2>§2 Vertragsgegenstand</h2>
+<p>Vertragsgegenstand ist die Erstellung von Websites sowie digitale Dienstleistungen gemäß individuellem Angebot.</p>
+
+<h2>§3 Vertragsschluss</h2>
+<p>Ein Vertrag kommt durch schriftliche Angebotsannahme zustande.</p>
+
+<h2>§4 Mitwirkungspflichten</h2>
+<p>Der Auftraggeber stellt Inhalte rechtzeitig zur Verfügung und sichert zu, dass diese keine Rechte Dritter verletzen.</p>
+
+<h2>§5 Vergütung</h2>
+<ul>
+<li>50 % Anzahlung bei Auftragserteilung</li>
+<li>50 % vor Livegang</li>
+</ul>
+<p>Nutzungsrechte gehen erst nach vollständiger Zahlung über.</p>
+
+<h2>§6 Abnahme</h2>
+<p>Erfolgt innerhalb von 7 Tagen keine Mängelanzeige, gilt das Werk als abgenommen.</p>
+
+<h2>§7 Nutzungsrechte</h2>
+<p>Der Auftragnehmer bleibt Urheber. Der Auftraggeber erhält nach Zahlung ein einfaches Nutzungsrecht. Weiterverkauf des Quellcodes ist unzulässig.</p>
+
+<h2>§8 Wartung</h2>
+<p>Wartung ist nur Bestandteil des Vertrags, wenn gesondert vereinbart.</p>
+
+<h2>§9 Haftung</h2>
+<p>Haftung nur bei Vorsatz und grober Fahrlässigkeit. Keine Haftung für Inhalte des Auftraggebers oder Google-Rankings.</p>
+
+<h2>§10 Gerichtsstand</h2>
+<p>Es gilt deutsches Recht. Gerichtsstand ist der Sitz des Auftragnehmers.</p>
+
+</div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#hero" class="logo">
+                        <span class="logo-icon">&lt;/&gt;</span>
+                        <span class="logo-text">SasjaDesign<span class="logo-dot">.</span></span>
+                    </a>
+                    <p>Professionelles Webdesign für lokale Unternehmen.<br> Damit du online gefunden wirst.</p>
+                </div>
+                
+                <div class="footer-links-col">
+                    <h4>Kontakt</h4>
+                    <ul>
+                        <li><a href="mailto:sasjadesign@gmail.com">sasjadesign@gmail.com</a></li>
+                       <li><a href="tel:+4915123456789">+49 151 5416 8773</a></li>
+                       
+                        <li><span>Oppach, DE</span></li>
+                    </ul>
+                </div>
+              <div class="footer-links-col">
+    <h4>Rechtliches</h4>
+    <ul>
+        <li><a href="impressum.html">Impressum</a></li>
+        <li><a href="datenschutz.html">Datenschutz</a></li>
+        <li><a href="#" class="reopen-cookie-settings">Cookie-Einstellungengen</a></li>
+    </ul>
+</div>
+        </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> SasjaDesign. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+<!-- ==================== FIXED BUTTONS ==================== -->
+    <button id="theme-toggle" aria-label="Dark Mode umschalten">🌙</button>
+ <!-- Cookie Consent -->
+<div class="cc-overlay" id="ccOverlay" aria-hidden="true">
+  <div class="cc-modal" role="dialog" aria-modal="true" aria-labelledby="ccTitle" aria-describedby="ccDesc">
+    <div class="cc-header">
+      <div class="cc-icon" aria-hidden="true">🍪</div>
+      <div>
+        <h3 id="ccTitle">Wir respektieren deine Privatsphäre</h3>
+        <p id="ccDesc">
+          Wir nutzen notwendige Cookies für grundlegende Funktionen. Optionale Cookies helfen uns, die Website zu verbessern
+          (z.B. Analytics) und externe Inhalte zu laden.
+        </p>
+      </div>
+    </div>
+
+    <button class="cc-toggle" id="ccToggle" type="button" aria-expanded="false" aria-controls="ccDetails">
+      <span>Einstellungen</span>
+      <span class="cc-chevron" aria-hidden="true">▾</span>
+    </button>
+
+    <div class="cc-details" id="ccDetails" hidden>
+      <div class="cc-row">
+        <div class="cc-row-text">
+          <h4>Notwendige Cookies</h4>
+          <p>Erforderlich für Grundfunktionen (z.B. Dark Mode, Cookie-Auswahl).</p>
+        </div>
+        <label class="cc-switch cc-switch--disabled" title="Kann nicht deaktiviert werden">
+          <input type="checkbox" checked disabled />
+          <span class="cc-slider"></span>
+        </label>
+      </div>
+
+      <div class="cc-row">
+        <div class="cc-row-text">
+          <h4>Analytics</h4>
+          <p>Hilft uns zu verstehen, wie die Website genutzt wird.</p>
+        </div>
+        <label class="cc-switch">
+          <input id="ccAnalytics" type="checkbox" />
+          <span class="cc-slider"></span>
+        </label>
+      </div>
+
+      <div class="cc-row">
+        <div class="cc-row-text">
+          <h4>Externe Medien</h4>
+          <p>Erlaubt externe Inhalte (z.B. YouTube, Google Maps, Fonts).</p>
+        </div>
+        <label class="cc-switch">
+          <input id="ccExternal" type="checkbox" />
+          <span class="cc-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="cc-actions">
+      <button class="cc-btn cc-btn--ghost" id="ccReject" type="button">Nur notwendige</button>
+      <button class="cc-btn cc-btn--ghost" id="ccSave" type="button" style="display:none;">Auswahl speichern</button>
+      <button class="cc-btn cc-btn--primary" id="ccAccept" type="button">Alle akzeptieren</button>
+    </div>
+
+    <div class="cc-links">
+      <a href="datenschutz.html">Datenschutz</a>
+      <span aria-hidden="true">•</span>
+      <a href="impressum.html">Impressum</a>
+      <span aria-hidden="true">•</span>
+      <a href="agb.html">AGB</a>
+      <span aria-hidden="true">•</span>
+      <a href="#" class="cc-reopen" id="ccReopen">Cookie-Einstellungen</a>
+    </div>
+  </div>
+</div>
+<script src="js/script.js"></script>
+
+</body>
+</html>
